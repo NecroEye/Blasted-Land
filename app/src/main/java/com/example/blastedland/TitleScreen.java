@@ -39,14 +39,6 @@ public class TitleScreen extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-        //The song will be added
-    }
-
     public void toGameScreen(View v) {
 
         Intent gameScreen = new Intent(this, GameScreen.class);
