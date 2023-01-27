@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -91,23 +93,58 @@ public class GameScreen extends AppCompatActivity {
     public void button1(View v) {
 
         story.selectPosition(story.nextPosition1);
+        animateAllButtons();
+        animateImage();
+        animateText();
+
 
     }
 
     public void button2(View v) {
         story.selectPosition(story.nextPosition2);
+        animateAllButtons();
+        animateImage();
+        animateText();
+
+
 
     }
 
     public void button3(View v) {
         story.selectPosition(story.nextPosition3);
+        animateAllButtons();
+        animateImage();
+        animateText();
+
 
     }
 
     public void button4(View v) {
         story.selectPosition(story.nextPosition4);
+        animateAllButtons();
+        animateImage();
+        animateText();
 
     }
 
+
+    private void animateAllButtons(){
+        Animation moveAni = AnimationUtils.loadAnimation(this,R.anim.movebutton);
+        button1.startAnimation(moveAni);
+        button2.startAnimation(moveAni);
+        button3.startAnimation(moveAni);
+        button4.startAnimation(moveAni);
+
+    }
+
+    private void animateImage(){
+        Animation fade = AnimationUtils.loadAnimation(this,R.anim.fade);
+        gameImage.startAnimation(fade);
+
+    }
+    private void animateText(){
+        Animation zoomfade = AnimationUtils.loadAnimation(this,R.anim.zoomfade);
+        gameText.startAnimation(zoomfade);
+    }
 
 }

@@ -1,5 +1,8 @@
 package com.example.blastedland.mountain;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.Story;

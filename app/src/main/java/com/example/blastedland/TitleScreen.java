@@ -44,6 +44,7 @@ public class TitleScreen extends AppCompatActivity {
         Intent gameScreen = new Intent(this, GameScreen.class);
         player.stop();
         startActivity(gameScreen);
+        overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
 
     }
 
