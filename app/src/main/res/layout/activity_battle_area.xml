@@ -27,12 +27,12 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="85dp"
+                android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/border"
-                android:text="Unknown person (you)"
                 android:fontFamily="@font/jack"
+                android:text="Unknown person (you)"
                 android:textSize="20sp" />
 
             <TextView
@@ -54,7 +54,7 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="230dp"
+                android:layout_width="220dp"
                 android:layout_height="391dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/unswordman" />
@@ -93,5 +93,67 @@
                 android:text="20 Health"
                 android:textSize="20sp" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/battleText"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/textborder2"
+            android:fontFamily="@font/header"
+            android:gravity="center"
+            android:text="TextView"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/battleButton1"
+            android:layout_width="match_parent"
+            android:background="@drawable/buttons"
+            android:backgroundTint="#7b7b7b"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/header"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginVertical="20dp"
+            android:text="Button" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/battleButton2"
+                android:layout_width="165dp"
+                android:background="@drawable/buttons"
+                android:backgroundTint="#7b7b7b"
+                android:layout_marginRight="80dp"
+                android:fontFamily="@font/header"
+                android:layout_height="wrap_content"
+                android:text="Button" />
+
+            <Button
+                android:id="@+id/battleButton3"
+                android:layout_width="140dp"
+                android:background="@drawable/buttons"
+                android:backgroundTint="#7b7b7b"
+                android:fontFamily="@font/header"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="Button" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/battleButton4"
+            android:background="@drawable/buttons"
+            android:backgroundTint="#7b7b7b"
+            android:layout_width="match_parent"
+            android:fontFamily="@font/header"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginVertical="20dp"
+            android:layout_height="wrap_content"
+            android:text="Button" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
