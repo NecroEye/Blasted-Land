@@ -143,8 +143,8 @@ public class GameScreen extends AppCompatActivity {
 
     }
     private void animateText(){
-        Animation zoomfade = AnimationUtils.loadAnimation(this,R.anim.zoomfade);
-        gameText.startAnimation(zoomfade);
+        Animation zoom_fader = AnimationUtils.loadAnimation(this,R.anim.zoomfade);
+        gameText.startAnimation(zoom_fader);
     }
 
 }

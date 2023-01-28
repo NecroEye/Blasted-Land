@@ -44,6 +44,11 @@ public class Story {
             case "kingdom": if(square.isFirstApproach()) square.firstApproach(); else square.ApproachCasually(); break;
             case "village": town.firstApproach(); break;
             case "dungeon": if(ui.key > 0) cursedDungeon.withKey(); else cursedDungeon.withoutKey(); break;
+            case "inn": square.DeadRat(); break;
+            case "blacksmithPlace": square.Blacksmith(); break;
+            case "blacksmith": square.toBlacksmith(); break;
+            case "stranger": square.toStranger(); break;
+            case "assassin": square.toThief(); break;
 
 
         }

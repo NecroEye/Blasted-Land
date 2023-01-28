@@ -1,14 +1,23 @@
 package com.example.blastedland.kingdom.Npcs;
 
-public class Stranger {
+import com.example.blastedland.Conversation;
+
+public class Stranger implements Npc {
 
 
+    private final Conversation conversation;
     private String name = "Stranger";
     private static boolean scroll = false;
 
 
-    public Stranger(){
+    public Stranger(Conversation conversation){
+        this.conversation = conversation;
 
+    }
+
+
+    @Override
+    public void talking(String buttonText) {
 
     }
 
@@ -27,4 +36,6 @@ public class Stranger {
     public static void setScroll(boolean scroll) {
         Stranger.scroll = scroll;
     }
+
+
 }

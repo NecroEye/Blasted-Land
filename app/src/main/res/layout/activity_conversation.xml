@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/s"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Conversation">
@@ -25,8 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="0dp"
-            android:orientation="horizontal"
             android:background="@drawable/border"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -92,8 +93,8 @@
                 android:id="@+id/imageView3"
                 android:layout_width="10dp"
                 android:layout_height="26dp"
-                android:paddingBottom="3dp"
                 android:layout_weight="1"
+                android:paddingBottom="3dp"
                 app:srcCompat="@drawable/money" />
 
             <TextView
@@ -129,13 +130,13 @@
             android:id="@+id/npcName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:fontFamily="@font/jack"
             android:layout_marginTop="5dp"
-            android:text="Assasin" />
+            android:fontFamily="@font/jack"
+            android:text="Assasin"
+            android:textSize="20dp" />
 
         <ImageView
-            android:id="@+id/npc"
+            android:id="@+id/npcImage"
             android:layout_width="match_parent"
             android:layout_height="239dp"
             android:layout_marginVertical="15dp"
@@ -151,7 +152,7 @@
 
             android:text="so a new face, welcome "
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="23sp" />
 
         <TextView
             android:id="@+id/textView5"
@@ -159,14 +160,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/topborder"
-            android:textSize="20dp"
-            android:text="unknow person (you)"
+            android:fontFamily="@font/jack"
             android:paddingTop="5dp"
-            android:fontFamily="@font/jack"/>
+            android:text="unknow person (you)"
+            android:textSize="20dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="263dp"
+            android:layout_height="242dp"
             android:layout_marginBottom="0dp"
             android:orientation="horizontal">
 
@@ -184,45 +185,49 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/button3"
-                    android:fontFamily="@font/header"
+                    android:id="@+id/heroButton1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#7b7b7b"
-                    android:background="@drawable/buttons"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginVertical="10dp"
-                    android:text="Button" />
-
-                <Button
-                    android:id="@+id/button4"
-                    android:fontFamily="@font/header"
-                    android:layout_width="match_parent"
-                    android:backgroundTint="#7b7b7b"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/buttons"
-                    android:layout_marginHorizontal="10dp"
-                    android:text="Button" />
-
-                <Button
-                    android:id="@+id/button5"
-                    android:fontFamily="@font/header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#7b7b7b"
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginVertical="10dp"
                     android:background="@drawable/buttons"
+                    android:backgroundTint="#7b7b7b"
+                    android:fontFamily="@font/header"
+                    android:onClick="hButton1"
                     android:text="Button" />
 
                 <Button
-                    android:id="@+id/button6"
-                    android:fontFamily="@font/header"
-                    android:backgroundTint="#7b7b7b"
+                    android:id="@+id/heroButton2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/buttons"
                     android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/buttons"
+                    android:backgroundTint="#7b7b7b"
+                    android:fontFamily="@font/header"
+                    android:onClick="hButton2"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/heroButton3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginVertical="10dp"
+                    android:background="@drawable/buttons"
+                    android:backgroundTint="#7b7b7b"
+                    android:fontFamily="@font/header"
+                    android:onClick="hButton3"
+                    android:text="Button" />
+
+                <Button
+                    android:id="@+id/heroButton4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:background="@drawable/buttons"
+                    android:backgroundTint="#7b7b7b"
+                    android:fontFamily="@font/header"
+                    android:onClick="hButton4"
                     android:text="Button" />
             </LinearLayout>
 
@@ -232,17 +237,19 @@
             android:id="@+id/textView8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_weight="1"
             android:background="@drawable/topborder"
-            android:paddingTop="5dp"
             android:fontFamily="@font/header"
+            android:gravity="center"
+            android:paddingTop="5dp"
             android:text="Right now you are at"
             android:textSize="20sp" />
 
         <ImageView
-            android:id="@+id/imageView11"
+            android:id="@+id/locationImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="73dp"
+            android:layout_weight="1"
             app:srcCompat="@drawable/tavern" />
 
 
