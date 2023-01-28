@@ -1,7 +1,9 @@
 package com.example.blastedland;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,8 +44,11 @@ public class Conversation extends AppCompatActivity {
 
         String npc = getIntent().getStringExtra("npc");
 
-        switch (npc){
+        switch (npc) {
             case "bob":
+
+                Typeface typeface = ResourcesCompat.getFont(this, R.font.punk);
+                npcText.setTypeface(typeface);
 
                 actions = new Blacksmith(this);
 
@@ -53,25 +58,60 @@ public class Conversation extends AppCompatActivity {
                 heroButton1.setText("Hey");
                 heroButton2.setText("i am looking for job");
                 heroButton3.setText("have you any advice?");
-                heroButton4.setText("Leave");
-                LocationImage.setImageResource(R.drawable.blacksmith); break;
+                heroButton4.setText("Back");
+                LocationImage.setImageResource(R.drawable.blacksmith);
+                break;
 
             case "stranger":
 
                 actions = new Stranger(this);
 
-                npcImage.setImageResource(R.drawable.stranger);
-                npcTextName.setText("Stranger");
-                npcText.setText("Do you want something?");
-                heroButton1.setText("'Sup");
-                heroButton2.setText("You look like a sorcerer");
-                heroButton3.setText("What is that dress weirdo?");
-                heroButton4.setText("Leave");
-                LocationImage.setImageResource(R.drawable.tavern); break;
+
+                if(Stranger.scroll == false){
+                    typeface = ResourcesCompat.getFont(this, R.font.untold);
+                    npcText.setTypeface(typeface);
+
+                    heroButton1.setVisibility(View.INVISIBLE);
+                    heroButton3.setVisibility(View.INVISIBLE);
+                    heroButton4.setVisibility(View.INVISIBLE);
+
+
+                    npcImage.setImageResource(R.drawable.stranger);
+                    npcTextName.setText("Stranger");
+                    npcText.setText("Do you want something?");
+                    heroButton1.setText("");
+                    heroButton2.setText("Back");
+                    heroButton3.setText("");
+                    heroButton4.setText("");
+                    LocationImage.setImageResource(R.drawable.tavern);
+                    break;
+                }
+                else{
+                    typeface = ResourcesCompat.getFont(this, R.font.punk);
+                    npcText.setTypeface(typeface);
+                    showAllButtons();
+
+                    npcImage.setImageResource(R.drawable.stranger);
+                    npcTextName.setText("Stranger");
+                    npcText.setText("Do you want something?");
+                    heroButton1.setText("Finally i am able to understand you!");
+                    heroButton2.setText("You look like a sorcerer");
+                    heroButton3.setText("What is that dress weirdo?");
+                    heroButton4.setText("Back");
+                    LocationImage.setImageResource(R.drawable.tavern);
+
+                    break;
+                }
+
+
 
             case "thief":
 
                 actions = new Thief(this);
+
+
+                typeface = ResourcesCompat.getFont(this, R.font.punk);
+                npcText.setTypeface(typeface);
 
                 npcImage.setImageResource(R.drawable.assasin);
                 npcTextName.setText("Assassin");
@@ -79,16 +119,13 @@ public class Conversation extends AppCompatActivity {
                 heroButton1.setText("N-No, i am just chilling");
                 heroButton2.setText("Do you know who i am?");
                 heroButton3.setText("give it some silver (10)");
-                heroButton4.setText("Leave"); // Run away ile değiştir square atsın direkt
-                LocationImage.setImageResource(R.drawable.tavern); break;
+                heroButton4.setText("Back"); // Run away ile değiştir square atsın direkt
+                LocationImage.setImageResource(R.drawable.tavern);
+                break;
         }
 
 
-
     }
-
-
-
 
 
     public void hButton1(View v) {
@@ -103,7 +140,6 @@ public class Conversation extends AppCompatActivity {
 
         specialWord = heroButton2.getText().toString();
         actions.talking(specialWord);
-
 
 
     }
@@ -123,6 +159,16 @@ public class Conversation extends AppCompatActivity {
 
 
     }
+
+    private void showAllButtons() {
+
+        heroButton1.setVisibility(View.VISIBLE);
+        heroButton2.setVisibility(View.VISIBLE);
+        heroButton3.setVisibility(View.VISIBLE);
+        heroButton4.setVisibility(View.VISIBLE);
+
+    }
+
 
     public String getSpecialWord() {
         return specialWord;

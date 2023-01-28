@@ -61,14 +61,6 @@ public class GameScreen extends AppCompatActivity {
 
         story.startingPoint();
 
-
-       /*
-       Typeface tf = Typeface.createFromAsset(getAssets(),"res/font/unt");
-
-         gameText.setTypeface(tf);
-
-        */
-
     }
 
 
@@ -86,6 +78,7 @@ public class GameScreen extends AppCompatActivity {
                     startActivity(screen);
                     player.stop();
                     finish();
+                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
 
                 }).show();
     }

@@ -1,6 +1,8 @@
 package com.example.blastedland.kingdom.places;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.view.View;
 
 import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
@@ -37,6 +39,9 @@ public class Square {
 
         FirstApproach = false;
 
+        showAllButtons();
+
+
         UI ui = UI.getInstance();
 
          ui.silver += 2;
@@ -53,13 +58,15 @@ public class Square {
 
         story.nextPosition1 = "inn";
         story.nextPosition2 = "blacksmithPlace";
-        story.nextPosition3 = "";
+        story.nextPosition3 = "king";
         story.nextPosition4 = "startingPoint";
 
 
     }
 
     public void ApproachCasually(){
+
+        showAllButtons();
 
         gs.gameImage.setImageResource(R.drawable.castle);
         gs.gameText.setText("You're in the Capital City and Everything looks like normal. There are couple of places. \n What will you do?");
@@ -72,7 +79,7 @@ public class Square {
 
         story.nextPosition1 = "inn";
         story.nextPosition2 = "blacksmithPlace";
-        story.nextPosition3 = "";
+        story.nextPosition3 = "king";
         story.nextPosition4 = "startingPoint";
 
 
@@ -116,6 +123,31 @@ public class Square {
 
 
     }
+
+    @SuppressLint("SetTextI18n")
+    public void KingCastle(){
+
+        gs.gameImage.setImageResource(R.drawable.knight);
+        gs.gameText.setText("you don't have permission to confort the king!");
+
+        gs.button1.setVisibility(View.INVISIBLE);
+        gs.button3.setVisibility(View.INVISIBLE);
+        gs.button4.setVisibility(View.INVISIBLE);
+
+
+
+        gs.button1.setText("");
+        gs.button2.setText("Leave");
+        gs.button3.setText("");
+        gs.button4.setText("");
+
+
+        story.nextPosition1 = "";
+        story.nextPosition2 = "kingdom";
+        story.nextPosition3 = "";
+        story.nextPosition4 = "";
+    }
+
     public void toBlacksmith(){
         String npc = "bob";
 
@@ -142,6 +174,16 @@ public class Square {
         chatScreen.putExtra("npc",npc);
         gs.startActivity(chatScreen);
         gs.overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+    }
+
+    private void showAllButtons(){
+
+        gs.button1.setVisibility(View.VISIBLE);
+        gs.button2.setVisibility(View.VISIBLE);
+        gs.button3.setVisibility(View.VISIBLE);
+        gs.button4.setVisibility(View.VISIBLE);
+
+
     }
 
 

@@ -49,6 +49,7 @@ public class Story {
             case "blacksmith": square.toBlacksmith(); break;
             case "stranger": square.toStranger(); break;
             case "assassin": square.toThief(); break;
+            case "king": square.KingCastle(); break;
 
 
         }

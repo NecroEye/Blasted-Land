@@ -22,7 +22,7 @@ public class Blacksmith implements Npc {
         if (!buttonText.isEmpty()) {
             switch (buttonText) {
 
-                case "Leave":
+                case "Back":
                     conversation.finish();
                     conversation.overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                     break;

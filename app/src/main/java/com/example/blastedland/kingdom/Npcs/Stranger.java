@@ -1,13 +1,14 @@
 package com.example.blastedland.kingdom.Npcs;
 
 import com.example.blastedland.Conversation;
+import com.example.blastedland.R;
 
 public class Stranger implements Npc {
 
 
     private final Conversation conversation;
     private String name = "Stranger";
-    private static boolean scroll = false;
+    public static boolean scroll = false;
 
 
     public Stranger(Conversation conversation){
@@ -19,6 +20,17 @@ public class Stranger implements Npc {
     @Override
     public void talking(String buttonText) {
 
+        if (!buttonText.isEmpty()) {
+            switch (buttonText) {
+
+                case "Back":
+                    conversation.finish();
+                    conversation.overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                    break;
+
+            }
+        }
+
     }
 
     public String getName() {
@@ -29,13 +41,6 @@ public class Stranger implements Npc {
         this.name = name;
     }
 
-    public static boolean isScroll() {
-        return scroll;
-    }
-
-    public static void setScroll(boolean scroll) {
-        Stranger.scroll = scroll;
-    }
 
 
 }
