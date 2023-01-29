@@ -1,6 +1,7 @@
 package com.example.blastedland.kingdom.Npcs;
 
 import com.example.blastedland.Conversation;
+import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 
 public class Stranger implements Npc {
@@ -25,6 +26,8 @@ public class Stranger implements Npc {
 
                 case "Back":
                     conversation.finish();
+                    GameScreen.maingamesong.setLooping(true);
+                    GameScreen.maingamesong.start();
                     conversation.overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                     break;
 

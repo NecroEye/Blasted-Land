@@ -8,36 +8,51 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.blastedland.kingdom.places.Square;
 
 public class GameScreen extends AppCompatActivity {
 
-    public TextView gameText;
-    public ImageView gameImage, healthImg;
-    public Button button1, button2, button3, button4;
+    public TextView gameText, popupText;
+    public ImageView gameImage, healthImg, popupImage;
+    public Button button1, button2, button3, button4, popupButton;
     private Story story;
     public TextView healthTx, moneyTx, anvilTx, keyTx, reincarnationTx;
-    private MediaPlayer player;
+    public static MediaPlayer maingamesong;
+    private LinearLayout layout;
+    private View popUpView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
 
-        player = MediaPlayer.create(this, R.raw.gamesong);
-        player.setLooping(true);
-        player.start();
+        maingamesong = MediaPlayer.create(this, R.raw.ancient);
+        maingamesong.setLooping(true);
+        maingamesong.start();
 
+        layout = findViewById(R.id.linearLayout);
 
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        popUpView = inflater.inflate(R.layout.gamepopup, null);
+
+        popupText = popUpView.findViewById(R.id.popupText);
+        popupImage = popUpView.findViewById(R.id.popupImage);
+        popupButton = popUpView.findViewById(R.id.popupButton);
 
         gameText = findViewById(R.id.gameTextView);
         healthImg = findViewById(R.id.HealthImg);
@@ -61,6 +76,19 @@ public class GameScreen extends AppCompatActivity {
 
         story.startingPoint();
 
+        popupImage.setImageResource(R.drawable.necromancer);
+        popupText.setText("You have been dead for unknown time, a rotten magic broke it. Right now you are once alive, don't remember anything and lost in this cursed land");
+
+        createPopUpWindow();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        maingamesong.pause();
+
     }
 
 
@@ -76,9 +104,9 @@ public class GameScreen extends AppCompatActivity {
                 }).setPositiveButton("Yes", (dialogInterface, i) -> {
 
                     startActivity(screen);
-                    player.stop();
+                    maingamesong.stop();
                     finish();
-                    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                    overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
                 }).show();
     }
@@ -98,7 +126,6 @@ public class GameScreen extends AppCompatActivity {
         animateAllButtons();
         animateImage();
         animateText();
-
 
 
     }
@@ -121,8 +148,9 @@ public class GameScreen extends AppCompatActivity {
     }
 
 
-    private void animateAllButtons(){
-        Animation moveAni = AnimationUtils.loadAnimation(this,R.anim.movebutton);
+    private void animateAllButtons() {
+
+        Animation moveAni = AnimationUtils.loadAnimation(this, R.anim.movebutton);
         button1.startAnimation(moveAni);
         button2.startAnimation(moveAni);
         button3.startAnimation(moveAni);
@@ -130,14 +158,30 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
-    private void animateImage(){
-        Animation fade = AnimationUtils.loadAnimation(this,R.anim.fade);
+    private void animateImage() {
+        Animation fade = AnimationUtils.loadAnimation(this, R.anim.fade);
         gameImage.startAnimation(fade);
 
     }
-    private void animateText(){
-        Animation zoom_fader = AnimationUtils.loadAnimation(this,R.anim.zoomfade);
+
+    private void animateText() {
+        Animation zoom_fader = AnimationUtils.loadAnimation(this, R.anim.zoomfade);
         gameText.startAnimation(zoom_fader);
     }
+
+    public void createPopUpWindow() {
+
+
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+
+        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0));
+
+        popupButton.setOnClickListener(view -> popupWindow.dismiss());
+
+    }
+
 
 }

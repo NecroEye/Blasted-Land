@@ -28,28 +28,67 @@ public class Story {
 
         this.ui = UI.getInstance();
         this.gs = gs;
-        this.cursedDungeon = new CursedDungeon(gs,this);
-        this.square = new Square(this,gs);
-        this.ashenM = new AshenMountain(gs,this);
-        this.town = new Town(gs,this);
+        this.cursedDungeon = new CursedDungeon(gs, this);
+        this.square = new Square(this, gs);
+        this.ashenM = new AshenMountain(gs, this);
+        this.town = new Town(gs, this);
 
     }
 
-    public void selectPosition(String position){
+    public void selectPosition(String position) {
 
-        switch (position){
+        switch (position) {
 
-            case "startingPoint": startingPoint(); break;
-            case "ashen": ashenM.ashen(); break;
-            case "kingdom": if(square.isFirstApproach()) square.firstApproach(); else square.ApproachCasually(); break;
-            case "village": town.firstApproach(); break;
-            case "dungeon": if(ui.key > 0) cursedDungeon.withKey(); else cursedDungeon.withoutKey(); break;
-            case "inn": square.DeadRat(); break;
-            case "blacksmithPlace": square.Blacksmith(); break;
-            case "blacksmith": square.toBlacksmith(); break;
-            case "stranger": square.toStranger(); break;
-            case "assassin": square.toThief(); break;
-            case "king": square.KingCastle(); break;
+            case "startingPoint":
+                startingPoint();
+                break;
+            case "ashen":
+                ashenM.ashen();
+                break;
+            case "kingdom":
+                if (square.isFirstApproach()) square.firstApproach();
+                else square.ApproachCasually();
+                break;
+            case "village":
+                town.firstApproach();
+                break;
+            case "dungeon":
+                if (ui.key > 0) cursedDungeon.withKey();
+                else cursedDungeon.withoutKey();
+                break;
+            case "inn":
+                square.DeadRat();
+                break;
+            case "blacksmithPlace":
+                square.Blacksmith();
+                break;
+            case "blacksmith":
+                square.toBlacksmith();
+                break;
+            case "stranger":
+                square.toStranger();
+                break;
+            case "assassin":
+                square.toThief();
+                break;
+            case "king":
+                square.KingCastle();
+                break;
+            case "healing":
+                if (ui.silver >= square.beerPrice) {
+
+                    ui.descreaseMoney(square.beerPrice,gs);
+                    gs.popupImage.setImageResource(R.drawable.heal);
+                    gs.popupText.setText("Drinking beer, increase your lost health!");
+                    gs.createPopUpWindow();
+                    ui.increaseHealth(20,gs);
+
+                } else {
+                    gs.popupImage.setImageResource(R.drawable.yenicoin);
+                    gs.popupText.setText("You can't effort beer");
+                    gs.createPopUpWindow();
+                    break;
+                }
 
 
         }
@@ -57,12 +96,12 @@ public class Story {
     }
 
 
-    public void startingPoint(){
+    public void startingPoint() {
 
         showAllButtons();
 
         gs.gameImage.setImageResource(R.drawable.map);
-        gs.gameText.setText("You're lost in the such a decayed land. \n What will you do?");
+        gs.gameText.setText("Where are you want to go?");
 
         gs.button1.setText("Go to north");
         gs.button2.setText("Go to west");
@@ -76,18 +115,15 @@ public class Story {
         nextPosition4 = "dungeon"; // goblet, troll, santelmo, door, book, minotaur
 
 
-
-
-
     }
 
-public void showAllButtons(){
+    public void showAllButtons() {
 
-    gs.button1.setVisibility(View.VISIBLE);
-    gs.button2.setVisibility(View.VISIBLE);
-    gs.button3.setVisibility(View.VISIBLE);
-    gs.button4.setVisibility(View.VISIBLE);
+        gs.button1.setVisibility(View.VISIBLE);
+        gs.button2.setVisibility(View.VISIBLE);
+        gs.button3.setVisibility(View.VISIBLE);
+        gs.button4.setVisibility(View.VISIBLE);
 
-}
+    }
 
 }

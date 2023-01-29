@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/popuplayout"
+    android:background="#474945">
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/popupbg"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/popupImage"
+            android:layout_width="240dp"
+            android:layout_height="190dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="40dp"
+             />
+
+        <TextView
+            android:id="@+id/popupText"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginHorizontal="15dp"
+            android:gravity="center"
+            android:text="Unseen, forbidden magic"
+            android:fontFamily="@font/enchanted"
+            android:textSize="28sp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/popupButton"
+            android:layout_width="111dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/buttons"
+            android:backgroundTint="@color/black"
+            android:fontFamily="@font/header"
+            android:onClick="skip"
+            android:text="Skip" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

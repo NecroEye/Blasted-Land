@@ -3,11 +3,21 @@ package com.example.blastedland;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.blastedland.kingdom.Npcs.Blacksmith;
@@ -18,12 +28,17 @@ import com.example.blastedland.kingdom.Npcs.Thief;
 public class Conversation extends AppCompatActivity {
 
 
-    public ImageView npcImage, LocationImage;
-    public TextView npcText, npcTextName;
-    public Button heroButton1, heroButton2, heroButton3, heroButton4;
+    public ImageView npcImage, LocationImage, popupImage;
+    public TextView npcText, npcTextName, popupText;
+    public Button heroButton1, heroButton2, heroButton3, heroButton4, popupButton;
     private String specialWord;
     public Blacksmith blacksmith;
     private Npc actions;
+    private LinearLayout layout;
+    private View popUpView;
+    private RelativeLayout layoutpop;
+    private MediaPlayer player;
+
 
 
     @Override
@@ -33,6 +48,13 @@ public class Conversation extends AppCompatActivity {
 
         blacksmith = new Blacksmith(this);
 
+
+        player = MediaPlayer.create(this, R.raw.chatsong);
+        player.setLooping(true);
+        player.start();
+
+        layout = findViewById(R.id.linearLayout2);
+
         npcImage = findViewById(R.id.npcImage);
         LocationImage = findViewById(R.id.locationImage);
         npcText = findViewById(R.id.npcText);
@@ -41,6 +63,15 @@ public class Conversation extends AppCompatActivity {
         heroButton2 = findViewById(R.id.heroButton2);
         heroButton3 = findViewById(R.id.heroButton3);
         heroButton4 = findViewById(R.id.heroButton4);
+
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        popUpView = inflater.inflate(R.layout.gamepopup, null);
+
+        popupImage = popUpView.findViewById(R.id.popupImage);
+        popupText = popUpView.findViewById(R.id.popupText);
+        popupButton = popUpView.findViewById(R.id.popupButton);
+        layoutpop = popUpView.findViewById(R.id.popuplayout);
+
 
         String npc = getIntent().getStringExtra("npc");
 
@@ -67,9 +98,15 @@ public class Conversation extends AppCompatActivity {
                 actions = new Stranger(this);
 
 
-                if(Stranger.scroll == false){
+                if (Stranger.scroll == false) {
+
                     typeface = ResourcesCompat.getFont(this, R.font.untold);
                     npcText.setTypeface(typeface);
+
+                    popupImage.setImageResource(R.drawable.parchment);
+                    popupText.setText("Without the scroll, you can't understand his words.");
+
+                    createPopUpWindow();
 
                     heroButton1.setVisibility(View.INVISIBLE);
                     heroButton3.setVisibility(View.INVISIBLE);
@@ -78,15 +115,14 @@ public class Conversation extends AppCompatActivity {
 
                     npcImage.setImageResource(R.drawable.stranger);
                     npcTextName.setText("Stranger");
-                    npcText.setText("Do you want something?");
+                    npcText.setText("Do you want something");
                     heroButton1.setText("");
                     heroButton2.setText("Back");
                     heroButton3.setText("");
                     heroButton4.setText("");
                     LocationImage.setImageResource(R.drawable.tavern);
                     break;
-                }
-                else{
+                } else {
                     typeface = ResourcesCompat.getFont(this, R.font.punk);
                     npcText.setTypeface(typeface);
                     showAllButtons();
@@ -102,7 +138,6 @@ public class Conversation extends AppCompatActivity {
 
                     break;
                 }
-
 
 
             case "thief":
@@ -127,12 +162,18 @@ public class Conversation extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        player.stop();
+
+    }
 
     public void hButton1(View v) {
 
         specialWord = heroButton1.getText().toString();
         actions.talking(specialWord);
-
+        animateAllButtons();
 
     }
 
@@ -140,7 +181,7 @@ public class Conversation extends AppCompatActivity {
 
         specialWord = heroButton2.getText().toString();
         actions.talking(specialWord);
-
+        animateAllButtons();
 
     }
 
@@ -148,7 +189,7 @@ public class Conversation extends AppCompatActivity {
 
         specialWord = heroButton3.getText().toString();
         actions.talking(specialWord);
-
+        animateAllButtons();
 
     }
 
@@ -156,6 +197,8 @@ public class Conversation extends AppCompatActivity {
 
         specialWord = heroButton4.getText().toString();
         actions.talking(specialWord);
+        Animation moveAni = AnimationUtils.loadAnimation(this, R.anim.movebutton);
+        heroButton4.startAnimation(moveAni);
 
 
     }
@@ -168,10 +211,34 @@ public class Conversation extends AppCompatActivity {
         heroButton4.setVisibility(View.VISIBLE);
 
     }
+    private void animateAllButtons() {
 
+        Animation moveAni = AnimationUtils.loadAnimation(this, R.anim.movebutton);
+        heroButton1.startAnimation(moveAni);
+        heroButton2.startAnimation(moveAni);
+        heroButton3.startAnimation(moveAni);
+
+
+    }
 
     public String getSpecialWord() {
         return specialWord;
+
+    }
+
+    private void createPopUpWindow() {
+
+
+        int width = ViewGroup.LayoutParams.MATCH_PARENT;
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true;
+        layoutpop.setBackgroundColor(0);
+
+        PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+        layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0));
+
+
+        popupButton.setOnClickListener(view -> popupWindow.dismiss());
 
     }
 }
