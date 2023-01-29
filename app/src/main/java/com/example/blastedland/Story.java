@@ -79,7 +79,7 @@ public class Story {
 
                     ui.descreaseMoney(square.beerPrice,gs);
                     gs.popupImage.setImageResource(R.drawable.heal);
-                    gs.popupText.setText("Drinking beer, increase your lost health!");
+                    gs.popupText.setText("Drinking beer, increase your lost health! \n You paid " + square.beerPrice + " silver for it.");
                     gs.createPopUpWindow();
                     ui.increaseHealth(20,gs);
 

@@ -12,7 +12,7 @@ public class Stranger implements Npc {
     public static boolean scroll = false;
 
 
-    public Stranger(Conversation conversation){
+    public Stranger(Conversation conversation) {
         this.conversation = conversation;
 
     }
@@ -28,7 +28,7 @@ public class Stranger implements Npc {
                     conversation.finish();
                     GameScreen.maingamesong.setLooping(true);
                     GameScreen.maingamesong.start();
-                    conversation.overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                    conversation.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     break;
 
             }
@@ -43,7 +43,6 @@ public class Stranger implements Npc {
     public void setName(String name) {
         this.name = name;
     }
-
 
 
 }

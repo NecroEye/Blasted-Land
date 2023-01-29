@@ -38,6 +38,11 @@ public class TitleScreen extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        player.stop();
+    }
 
     public void toGameScreen(View v) {
 

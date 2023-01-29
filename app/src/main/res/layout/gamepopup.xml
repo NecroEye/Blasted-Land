@@ -22,7 +22,8 @@
             android:layout_width="240dp"
             android:layout_height="190dp"
             android:layout_marginStart="80dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="5dp"
              />
 
         <TextView
@@ -41,7 +42,8 @@
             android:layout_width="111dp"
             android:layout_height="48dp"
             android:layout_marginStart="150dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:background="@drawable/buttons"
             android:backgroundTint="@color/black"
             android:fontFamily="@font/header"
