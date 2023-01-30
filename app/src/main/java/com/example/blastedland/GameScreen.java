@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -169,6 +170,7 @@ public class GameScreen extends AppCompatActivity {
         gameText.startAnimation(zoom_fader);
     }
 
+
     public void createPopUpWindow() {
 
 
@@ -177,9 +179,13 @@ public class GameScreen extends AppCompatActivity {
         boolean focusable = true;
 
         PopupWindow popupWindow = new PopupWindow(popUpView, width, height, focusable);
+
+
         layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0));
 
-        popupButton.setOnClickListener(view -> popupWindow.dismiss());
+        popupButton.setOnClickListener(view ->  popupWindow.dismiss());
+        layout.removeView(popUpView);
+
 
     }
 

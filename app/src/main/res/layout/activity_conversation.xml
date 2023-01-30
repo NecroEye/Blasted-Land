@@ -239,17 +239,19 @@
             android:id="@+id/locationText"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_weight="1"
             android:background="@drawable/topborder"
             android:fontFamily="@font/header"
             android:gravity="center"
             android:paddingTop="5dp"
             android:text="Right now you are at"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/locationImage"
             android:layout_width="match_parent"
             android:layout_height="75dp"
+            android:layout_weight="1"
             app:srcCompat="@drawable/tavern" />
 
 

@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.blastedland.mountain.AshenMountain;
+
 public class TitleScreen extends AppCompatActivity {
 
 
@@ -45,6 +47,11 @@ public class TitleScreen extends AppCompatActivity {
     }
 
     public void toGameScreen(View v) {
+
+        AshenMountain.isSeen = false;
+        AshenMountain.place1 = "";
+        AshenMountain.place2 = "";
+        AshenMountain.place3 = "";
 
         Intent gameScreen = new Intent(this, GameScreen.class);
         player.stop();

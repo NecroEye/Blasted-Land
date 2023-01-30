@@ -23,6 +23,8 @@ public class Thief implements Npc{
         return name;
     }
 
+
+
     public void firstEncounter() {
 
 

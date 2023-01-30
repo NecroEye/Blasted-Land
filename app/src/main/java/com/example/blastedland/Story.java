@@ -74,22 +74,65 @@ public class Story {
             case "king":
                 square.KingCastle();
                 break;
+
+            case "shinyArmor":
+
+                gs.popupImage.setImageResource(R.drawable.armor);
+                gs.popupText.setText("You can just watch these armors, they are beyond your budget. \n when you have good amount money come back again.");
+                gs.createPopUpWindow();
+                break;
+            case "armorerJob":
+                square.toBlacksmithJob();
+                break;
+
             case "healing":
                 if (ui.silver >= square.beerPrice) {
 
-                    ui.descreaseMoney(square.beerPrice,gs);
+                    ui.descreaseMoney(square.beerPrice, gs);
                     gs.popupImage.setImageResource(R.drawable.heal);
                     gs.popupText.setText("Drinking beer, increase your lost health! \n You paid " + square.beerPrice + " silver for it.");
                     gs.createPopUpWindow();
-                    ui.increaseHealth(20,gs);
+                    ui.increaseHealth(20, gs);
+                    break;
 
                 } else {
-                    gs.popupImage.setImageResource(R.drawable.yenicoin);
-                    gs.popupText.setText("You can't effort beer");
+                    gs.popupImage.setImageResource(R.drawable.beer);
+                    gs.popupText.setText("You can't effort beer.");
                     gs.createPopUpWindow();
                     break;
                 }
 
+            case "Take a look":
+
+                gs.popupImage.setImageResource(R.drawable.lostswordsman);
+                gs.popupText.setText("You found yourself a high place, looking around and seeing a cave enterance.");
+                gs.createPopUpWindow();
+                gs.button2.setText("Frozen Cave");
+                nextPosition2 = "";
+                ashenM.place2 = "Frozen Cave";
+                ashenM.ashen();
+
+                break;
+            case "MountainSign":
+
+                gs.popupImage.setImageResource(R.drawable.sign);
+                gs.popupText.setText("Sign says, there is a monster in this Mountain!");
+                gs.createPopUpWindow();
+                ashenM.isSeen = true;
+                gs.button3.setVisibility(View.GONE);
+
+                break;
+
+            case "kraken":
+
+                town.toKraken();
+
+                break;
+            case "dragon":
+
+                ashenM.toDragon();
+
+                break;
 
         }
 

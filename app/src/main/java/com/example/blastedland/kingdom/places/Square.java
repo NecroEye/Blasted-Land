@@ -90,7 +90,7 @@ public class Square {
         gs.gameText.setText("You're in the Dead Rat Inn, it isn't very crowd. you found a empty place yourself. \n What will you do?");
 
         gs.button1.setText("Order a beer (2)");
-        gs.button2.setText("talk to Stranger");
+        gs.button2.setText("Talk to Stranger");
         gs.button3.setText("Look at the shadows");
         gs.button4.setText("Leave from inn");
 
@@ -109,15 +109,15 @@ public class Square {
         gs.gameImage.setImageResource(R.drawable.blacksmith);
         gs.gameText.setText("You're in Blacksmith's Shop, everywhere surrounded shiny crafts. \n What will you do?");
 
-        gs.button1.setText("talk to blacksmith");
-        gs.button2.setText("look at goods");
-        gs.button3.setText("ask for any job");
+        gs.button1.setText("Talk to blacksmith");
+        gs.button2.setText("Look at goods");
+        gs.button3.setText("Ask for any job");
         gs.button4.setText("Leave from inn");
 
 
         story.nextPosition1 = "blacksmith";
-        story.nextPosition2 = "";
-        story.nextPosition3 = "";
+        story.nextPosition2 = "shinyArmor";
+        story.nextPosition3 = "armorerJob";
         story.nextPosition4 = "kingdom";
 
 
@@ -148,6 +148,15 @@ public class Square {
 
     public void toBlacksmith() {
         String npc = "bob";
+
+        Intent chatScreen = new Intent(gs, Conversation.class);
+        chatScreen.putExtra("npc", npc);
+        gs.startActivity(chatScreen);
+        gs.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+    }
+    public void toBlacksmithJob() {
+        String npc = "armorerJob";
 
         Intent chatScreen = new Intent(gs, Conversation.class);
         chatScreen.putExtra("npc", npc);

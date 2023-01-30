@@ -3,7 +3,9 @@ package com.example.blastedland;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
-import android.annotation.SuppressLint;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import com.example.blastedland.kingdom.Npcs.Blacksmith;
 import com.example.blastedland.kingdom.Npcs.Npc;
 import com.example.blastedland.kingdom.Npcs.Stranger;
 import com.example.blastedland.kingdom.Npcs.Thief;
+import com.example.blastedland.player.UI;
 
 public class Conversation extends AppCompatActivity {
 
@@ -38,7 +41,7 @@ public class Conversation extends AppCompatActivity {
     private View popUpView;
     private RelativeLayout layoutpop;
     private MediaPlayer player;
-
+    private UI ui;
 
 
     @Override
@@ -47,7 +50,7 @@ public class Conversation extends AppCompatActivity {
         setContentView(R.layout.activity_conversation);
 
         blacksmith = new Blacksmith(this);
-
+        this.ui = UI.getInstance();
 
         player = MediaPlayer.create(this, R.raw.chatsong);
         player.setLooping(true);
@@ -148,15 +151,47 @@ public class Conversation extends AppCompatActivity {
                 typeface = ResourcesCompat.getFont(this, R.font.punk);
                 npcText.setTypeface(typeface);
 
+                if (ui.silver >= 10) {
+
+                    heroButton3.setText("give it some silver (10)");
+                    heroButton3.setClickable(true);
+                    heroButton3.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#7b7b7b")));
+
+                } else {
+
+                    heroButton3.setText("give it some silver (10)");
+                    heroButton3.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+                    heroButton3.setClickable(false);
+                }
+
                 npcImage.setImageResource(R.drawable.assasin);
                 npcTextName.setText("Assassin");
                 npcText.setText("HeHeHe lookin' for some trouble bastard!");
                 heroButton1.setText("N-No, i am just chilling");
                 heroButton2.setText("Do you know who i am?");
-                heroButton3.setText("give it some silver (10)");
                 heroButton4.setText("Back"); // Run away ile değiştir square atsın direkt
                 LocationImage.setImageResource(R.drawable.tavern);
                 break;
+
+            case "armorerJob":
+
+                actions = new Blacksmith(this);
+
+                heroButton1.setVisibility(View.INVISIBLE);
+                heroButton3.setVisibility(View.INVISIBLE);
+                heroButton4.setVisibility(View.INVISIBLE);
+
+
+                npcImage.setImageResource(R.drawable.elf);
+                npcTextName.setText("Blacksmith");
+                npcText.setText("I don't have job for you now, come back later.");
+                heroButton1.setText("");
+                heroButton2.setText("Back");
+                heroButton3.setText("");
+                heroButton4.setText("");
+                LocationImage.setImageResource(R.drawable.blacksmith);
+                break;
+
         }
 
 
@@ -211,6 +246,7 @@ public class Conversation extends AppCompatActivity {
         heroButton4.setVisibility(View.VISIBLE);
 
     }
+
     private void animateAllButtons() {
 
         Animation moveAni = AnimationUtils.loadAnimation(this, R.anim.movebutton);

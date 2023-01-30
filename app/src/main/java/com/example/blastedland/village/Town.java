@@ -1,5 +1,9 @@
 package com.example.blastedland.village;
 
+import android.content.Intent;
+
+import com.example.blastedland.BattleArea;
+import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.Story;
@@ -16,8 +20,6 @@ public class Town {
 
         this.gameScreen = gameScreen;
         this.story = story;
-
-
 
 
     }
@@ -38,13 +40,24 @@ public class Town {
 
         story.nextPosition1 = "";
         story.nextPosition2 = "";
-        story.nextPosition3 = "";
+        story.nextPosition3 = "kraken";
         story.nextPosition4 = "startingPoint";
 
 
     }
 
     public void casuallyApproach(){
+
+    }
+
+    public void toKraken(){
+
+        String monster = "kraken";
+
+        Intent chatScreen = new Intent(gameScreen, BattleArea.class);
+        chatScreen.putExtra("monster", monster);
+        gameScreen.startActivity(chatScreen);
+        gameScreen.overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
 
     }
 
