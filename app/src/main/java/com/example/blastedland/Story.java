@@ -37,6 +37,7 @@ public class Story {
 
     public void selectPosition(String position) {
 
+
         switch (position) {
 
             case "startingPoint":

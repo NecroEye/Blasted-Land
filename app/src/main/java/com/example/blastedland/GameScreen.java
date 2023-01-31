@@ -32,7 +32,7 @@ public class GameScreen extends AppCompatActivity {
     public ImageView gameImage, healthImg, popupImage;
     public Button button1, button2, button3, button4, popupButton;
     private Story story;
-    public TextView healthTx, moneyTx, anvilTx, keyTx, reincarnationTx;
+    public static TextView healthTx, moneyTx, anvilTx, keyTx, reincarnationTx;
     public static MediaPlayer maingamesong;
     private LinearLayout layout;
     private View popUpView;

@@ -30,7 +30,7 @@ public class Town {
 
 
         gameScreen.gameImage.setImageResource(R.drawable.village);
-        gameScreen.gameText.setText("You are approaching the town, all eyes on you cuz no one isn't used to see new face around here");
+        gameScreen.gameText.setText("You are approaching the town, all eyes on you because no one isn't used to see new face around here");
 
         gameScreen.button1.setText("Tavern");
         gameScreen.button2.setText("Southern Village (Demi-destroyed)");

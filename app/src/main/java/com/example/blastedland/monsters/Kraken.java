@@ -1,29 +1,56 @@
 package com.example.blastedland.monsters;
 
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+
 import com.example.blastedland.BattleArea;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.player.UI;
 
-public class Kraken implements MonsterAction {
+public class Kraken extends MonsterEntity implements MonsterAction {
+
 
 
     public Kraken(BattleArea battleArea){
 
+
+        monsterHealth = 20;
+        monsterDamage = 2;
+
         battleArea.monsterName.setText("Kraken");
         battleArea.monsterView.setImageResource(R.drawable.kraken);
-        battleArea.monsterHealth.setText("20 Health");
+        battleArea.monsterHealth.setText(this.monsterHealth + " Health");
     }
 
     @Override
-    public void attack(UI ui) {
+    public void attack(UI ui, BattleArea area) {
+
+        Animation bounce = AnimationUtils.loadAnimation(area, R.anim.bounce);
+
+
+
+
+        if(ui.health > 0 && monsterHealth > 0){
+
+            ui.health -= monsterDamage;
+            area.heroHealth.setText(ui.health + " Health");
+            area.heroHealth.startAnimation(bounce);
+            area.monsterTurnView.setVisibility(View.INVISIBLE);
+            area.heroTurnView.setVisibility(View.VISIBLE);
+            GameScreen.healthTx.setText("= " + ui.health);
+
+
+
+        }
+
 
     }
 
     @Override
     public void battleChoose(BattleArea battleArea, String choose) {
 
-        // view ve textler ayarlanacak
 
         switch (choose){
 
