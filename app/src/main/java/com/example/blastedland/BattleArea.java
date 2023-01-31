@@ -48,7 +48,6 @@ public class BattleArea extends AppCompatActivity {
         layout = findViewById(R.id.layout2);
 
 
-
         title = new Intent(this, TitleScreen.class);
 
 
@@ -135,13 +134,11 @@ public class BattleArea extends AppCompatActivity {
                                     monsterAction.attack(ui, BattleArea.this);
                                 }
 
-                                choose1.setClickable(true);
-                                choose2.setClickable(true);
-                                choose3.setClickable(true);
-                                choose4.setClickable(true);
+                                allButtonUnlocked();
 
                                 if (ui.health <= 0) {
 
+                                    allButtonLocked();
                                     popupImage.setImageResource(R.drawable.death);
                                     popupText.setText("YOU DIED.");
                                     popupButton.setText("Exit");
@@ -150,6 +147,7 @@ public class BattleArea extends AppCompatActivity {
                                     createPopUpWindow();
                                 } else if (monsterEntity.getMonsterHealth() <= 0) {
 
+                                    allButtonLocked();
                                     popupImage.setImageResource(R.drawable.money_bag);
                                     popupText.setText("You Won! \n You have earned 20 silver!");
                                     popupButton.setText("Take");
@@ -168,13 +166,9 @@ public class BattleArea extends AppCompatActivity {
         Thread thread = new Thread(monsterAttackTimer);
         thread.start();
 
-        choose1.setClickable(false);
-        choose2.setClickable(false);
-        choose3.setClickable(false);
-        choose4.setClickable(false);
+        allButtonLocked();
 
         ui.heroAttack(monsterEntity, this);
-
 
 
     }
@@ -218,7 +212,7 @@ public class BattleArea extends AppCompatActivity {
                     popupWindow.dismiss();
                     layout.removeView(popUpView);
                     startActivity(title);
-                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
 
                 }
@@ -236,9 +230,7 @@ public class BattleArea extends AppCompatActivity {
                     popupWindow.dismiss();
                     layout.removeView(popUpView);
                     finish();
-                    overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_left);
-
-
+                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
 
                 }
@@ -246,6 +238,23 @@ public class BattleArea extends AppCompatActivity {
 
         }
 
+
+    }
+
+    private void allButtonLocked() {
+
+        choose1.setClickable(false);
+        choose2.setClickable(false);
+        choose3.setClickable(false);
+        choose4.setClickable(false);
+    }
+
+    private void allButtonUnlocked() {
+
+        choose1.setClickable(true);
+        choose2.setClickable(true);
+        choose3.setClickable(true);
+        choose4.setClickable(true);
 
     }
 
