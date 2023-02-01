@@ -2,10 +2,13 @@ package com.example.blastedland.kingdom.places;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
@@ -39,11 +42,12 @@ public class Square {
         FirstApproach = false;
 
         showAllButtons();
+        allButtonSetThem();
 
 
         UI ui = UI.getInstance();
 
-        ui.increaseMoney(2,gs);
+        ui.increaseMoney(2, gs);
 
         gs.gameImage.setImageResource(R.drawable.castle);
         gs.gameText.setText("You're in the Capital City and shadow of the giant capital city wall upon you. There are couple of places. luckily you found two silver on the floor \n What will you do?");
@@ -65,6 +69,7 @@ public class Square {
     public void ApproachCasually() {
 
         showAllButtons();
+        allButtonSetThem();
 
         gs.gameImage.setImageResource(R.drawable.castle);
         gs.gameText.setText("You're in the Capital City and Everything looks like normal. There are couple of places. \n What will you do?");
@@ -155,6 +160,7 @@ public class Square {
         gs.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
     }
+
     public void toBlacksmithJob() {
         String npc = "armorerJob";
 
@@ -191,6 +197,17 @@ public class Square {
         gs.button3.setVisibility(View.VISIBLE);
         gs.button4.setVisibility(View.VISIBLE);
 
+
+    }
+
+    private void allButtonSetThem() {
+
+        Drawable img = ContextCompat.getDrawable(gs, R.drawable.royalbutton);
+
+        gs.button1.setBackground(img);
+        gs.button2.setBackground(img);
+        gs.button3.setBackground(img);
+        gs.button4.setBackground(img);
 
     }
 

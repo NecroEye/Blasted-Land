@@ -32,6 +32,7 @@ public class AshenMountain {
     public void ashen() {
 
 
+        allButtonsSetThem();
         gs.gameImage.setImageResource(R.drawable.mountains);
         gs.gameText.setText("You're at the Ashen Mountain. \n What will you do?");
 
@@ -108,6 +109,17 @@ public class AshenMountain {
         chatScreen.putExtra("monster", monster);
         gs.startActivity(chatScreen);
         gs.overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+    }
+
+    private void allButtonsSetThem(){
+
+        Drawable img = ContextCompat.getDrawable(gs, R.drawable.mountainbutton);
+
+        gs.button1.setBackground(img);
+        gs.button2.setBackground(img);
+        gs.button3.setBackground(img);
+        gs.button4.setBackground(img);
+
     }
 
 

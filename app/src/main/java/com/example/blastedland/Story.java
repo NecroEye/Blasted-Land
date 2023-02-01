@@ -1,11 +1,13 @@
 package com.example.blastedland;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.blastedland.dungeon.CursedDungeon;
 import com.example.blastedland.kingdom.places.Square;
@@ -143,6 +145,9 @@ public class Story {
     public void startingPoint() {
 
         showAllButtons();
+        allButtonSetDefault();
+
+
 
         gs.gameImage.setImageResource(R.drawable.map);
         gs.gameText.setText("Where are you want to go?");
@@ -167,6 +172,16 @@ public class Story {
         gs.button2.setVisibility(View.VISIBLE);
         gs.button3.setVisibility(View.VISIBLE);
         gs.button4.setVisibility(View.VISIBLE);
+
+    }
+    private void allButtonSetDefault(){
+
+        Drawable img = ContextCompat.getDrawable(gs, R.drawable.buttons);
+
+        gs.button1.setBackground(img);
+        gs.button2.setBackground(img);
+        gs.button3.setBackground(img);
+        gs.button4.setBackground(img);
 
     }
 

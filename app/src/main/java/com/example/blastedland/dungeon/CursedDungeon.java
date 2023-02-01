@@ -1,6 +1,9 @@
 package com.example.blastedland.dungeon;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
+
+import androidx.core.content.ContextCompat;
 
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
@@ -25,6 +28,7 @@ public class CursedDungeon {
 
     public void withoutKey(){
 
+        allButtonsSetThem();
         gameScreen.gameImage.setImageResource(R.drawable.door);
         gameScreen.gameText.setText("You can't enter this dungeon because you haven't any key");
 
@@ -49,6 +53,7 @@ public class CursedDungeon {
 
         ui.key -= 1;
 
+        allButtonsSetThem();
         gameScreen.gameImage.setImageResource(R.drawable.door);
         gameScreen.gameText.setText("you used a key to enter the dungeon!");
 
@@ -65,6 +70,17 @@ public class CursedDungeon {
         story.nextPosition3 = "";
         story.nextPosition4 = "startingPoint";
 
+
+    }
+
+    private void allButtonsSetThem() {
+
+        Drawable img = ContextCompat.getDrawable(gameScreen, R.drawable.dungeonbutton);
+
+        gameScreen.button1.setBackground(img);
+        gameScreen.button2.setBackground(img);
+        gameScreen.button3.setBackground(img);
+        gameScreen.button4.setBackground(img);
 
     }
 

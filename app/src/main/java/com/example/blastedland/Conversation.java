@@ -159,9 +159,11 @@ public class Conversation extends AppCompatActivity {
 
                 } else {
 
+                    Animation shake = AnimationUtils.loadAnimation(this,R.anim.shake);
                     heroButton3.setText("give it some silver (10)");
                     heroButton3.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
                     heroButton3.setClickable(false);
+
                 }
 
                 npcImage.setImageResource(R.drawable.assasin);

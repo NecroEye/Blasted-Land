@@ -139,8 +139,8 @@
         <ImageView
             android:id="@+id/npcImage"
             android:layout_width="match_parent"
-            android:layout_height="239dp"
-            android:layout_marginVertical="15dp"
+            android:layout_height="225dp"
+            android:layout_marginVertical="10dp"
             app:srcCompat="@drawable/assasin" />
 
         <TextView
@@ -236,23 +236,21 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/locationText"
+            android:id="@+id/textView2"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_weight="1"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/topborder"
             android:fontFamily="@font/header"
             android:gravity="center"
-            android:paddingTop="5dp"
             android:text="Right now you are at"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/locationImage"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/tavern" />
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/blacksmith" />
 
 
     </LinearLayout>

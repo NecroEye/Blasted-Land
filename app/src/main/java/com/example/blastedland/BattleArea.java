@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,7 +33,7 @@ public class BattleArea extends AppCompatActivity {
     public ImageView heroView, monsterView, heroTurnView, monsterTurnView, popupImage;
     public TextView monsterName, monsterHealth, descriptionText, heroHealth, heroName, popupText;
     public Button choose1, choose2, choose3, choose4, popupButton;
-    private MonsterAction monsterAction;
+    public MonsterAction monsterAction;
     private MonsterEntity monsterEntity;
     private MediaPlayer player;
     private UI ui;
@@ -36,6 +41,7 @@ public class BattleArea extends AppCompatActivity {
     private LinearLayout layout;
     private View popUpView;
     public Intent title;
+    public Vibrator vibe;
 
 
     @Override
@@ -44,6 +50,8 @@ public class BattleArea extends AppCompatActivity {
         setContentView(R.layout.activity_battle_area);
 
         ui = UI.getInstance();
+
+        vibe = (Vibrator) BattleArea.this.getSystemService(this.VIBRATOR_SERVICE);
 
         layout = findViewById(R.id.layout2);
 
@@ -110,14 +118,7 @@ public class BattleArea extends AppCompatActivity {
     }
 
 
-    public void battleButton1(View v) {
-
-
-    }
-
-    public void battleButton2(View v) {
-
-
+    public void monsterAttack() {
         Runnable monsterAttackTimer = new Runnable() {
             @Override
             public void run() {
@@ -137,6 +138,16 @@ public class BattleArea extends AppCompatActivity {
                                 allButtonUnlocked();
 
                                 if (ui.health <= 0) {
+
+
+                                    if(Build.VERSION.SDK_INT >= 26){
+
+                                        VibrationEffect vibrationEffect1 = VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE);
+                                        vibe.vibrate(vibrationEffect1);
+                                    }
+                                    else{
+                                        vibe.vibrate(1000);
+                                    }
 
                                     allButtonLocked();
                                     popupImage.setImageResource(R.drawable.death);
@@ -165,6 +176,18 @@ public class BattleArea extends AppCompatActivity {
         };
         Thread thread = new Thread(monsterAttackTimer);
         thread.start();
+    }
+
+
+    public void battleButton1(View v) {
+
+
+    }
+
+    public void battleButton2(View v) {
+
+
+        monsterAttack();
 
         allButtonLocked();
 
@@ -241,7 +264,7 @@ public class BattleArea extends AppCompatActivity {
 
     }
 
-    private void allButtonLocked() {
+    public void allButtonLocked() {
 
         choose1.setClickable(false);
         choose2.setClickable(false);
@@ -249,7 +272,7 @@ public class BattleArea extends AppCompatActivity {
         choose4.setClickable(false);
     }
 
-    private void allButtonUnlocked() {
+    public void allButtonUnlocked() {
 
         choose1.setClickable(true);
         choose2.setClickable(true);

@@ -183,7 +183,27 @@ public class GameScreen extends AppCompatActivity {
 
         layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0));
 
-        popupButton.setOnClickListener(view ->  popupWindow.dismiss());
+
+
+        if(story.nextPosition2.matches("Take a look")){
+
+            popupButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Animation change = AnimationUtils.loadAnimation(GameScreen.this,R.anim.bounce);
+                    popupWindow.dismiss();
+
+                    button2.startAnimation(change);
+
+                }
+            });
+
+        }
+        else {
+            popupButton.setOnClickListener(view ->  popupWindow.dismiss());
+
+        }
+
         layout.removeView(popUpView);
 
 

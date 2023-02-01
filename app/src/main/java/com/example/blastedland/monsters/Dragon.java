@@ -9,6 +9,8 @@ import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.player.UI;
 
+import java.util.Random;
+
 public class Dragon extends MonsterEntity implements MonsterAction {
 
 
@@ -32,6 +34,7 @@ public class Dragon extends MonsterEntity implements MonsterAction {
     public void attack(UI ui, BattleArea area) {
 
         Animation bounce = AnimationUtils.loadAnimation(area, R.anim.bounce);
+        Animation newBounce = AnimationUtils.loadAnimation(area, R.anim.diffshake);
 
 
         if(ui.health > 0 && monsterHealth > 0){
@@ -42,6 +45,7 @@ public class Dragon extends MonsterEntity implements MonsterAction {
             area.monsterTurnView.setVisibility(View.INVISIBLE);
             area.heroTurnView.setVisibility(View.VISIBLE);
             GameScreen.healthTx.setText("= " + ui.health);
+            area.heroView.startAnimation(newBounce);
 
 
         }
@@ -57,14 +61,31 @@ public class Dragon extends MonsterEntity implements MonsterAction {
 
             case "Run Away":
 
-                battleArea.finish();
-                GameScreen.maingamesong.setLooping(true);
-                GameScreen.maingamesong.start();
-                battleArea.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                int chanceOfEscaping = new Random().nextInt(3);
+                System.out.println("Chance: " + chanceOfEscaping);
 
-                break;
+                if(chanceOfEscaping == 2){
 
+                    battleArea.finish();
+                    GameScreen.maingamesong.setLooping(true);
+                    GameScreen.maingamesong.start();
+                    battleArea.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+                    break;
+                }
+                else{
+
+                    Animation shake = AnimationUtils.loadAnimation(battleArea,R.anim.shake);
+
+                    battleArea.monsterAttack();
+                    battleArea.allButtonLocked();
+                    battleArea.choose4.startAnimation(shake);
+
+
+                    break;
+                }
         }
+
     }
 
     public double getMonsterHealth() {

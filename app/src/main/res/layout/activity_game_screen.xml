@@ -115,7 +115,7 @@
 
             <TextView
                 android:id="@+id/health"
-                android:layout_width="5dp"
+                android:layout_width="7dp"
                 android:layout_height="26dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/header"

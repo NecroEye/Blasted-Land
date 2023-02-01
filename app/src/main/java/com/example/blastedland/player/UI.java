@@ -38,12 +38,15 @@ public class UI {
     public void heroAttack(MonsterEntity mainVariables, BattleArea battleArea) {
 
         Animation bounce = AnimationUtils.loadAnimation(battleArea, R.anim.bounce);
+        Animation newBounce = AnimationUtils.loadAnimation(battleArea, R.anim.diffshake);
+
 
         if (mainVariables.getMonsterHealth() > 0 && health > 0) {
 
             mainVariables.setMonsterHealth(mainVariables.getMonsterHealth() - this.basicDamage);
             battleArea.monsterHealth.setText(mainVariables.getMonsterHealth() + " Health");
             battleArea.monsterHealth.startAnimation(bounce);
+            battleArea.monsterView.startAnimation(newBounce);
 
             battleArea.heroTurnView.setVisibility(View.INVISIBLE);
             battleArea.monsterTurnView.setVisibility(View.VISIBLE);
