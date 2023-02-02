@@ -77,7 +77,7 @@ public class Town {
 
         story.showAllButtons();
 
-        gameScreen.gameImage.setImageResource(R.drawable.hut);
+        gameScreen.gameImage.setImageResource(R.drawable.stvillage);
         gameScreen.gameText.setText("Looks like this place is ominous");
 
         gameScreen.button1.setText("Witch's Hut");
