@@ -1,4 +1,4 @@
-package com.example.blastedland.kingdom.Npcs;
+package com.example.blastedland.Npcs;
 
 public interface Npc {
 

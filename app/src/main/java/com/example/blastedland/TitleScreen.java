@@ -48,6 +48,7 @@ public class TitleScreen extends AppCompatActivity {
 
     public void toGameScreen(View v) {
 
+        GameScreen.setIsOpen(false);
         AshenMountain.isSeen = false;
         AshenMountain.place1 = "";
         AshenMountain.place2 = "";

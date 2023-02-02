@@ -7,9 +7,9 @@ import com.example.blastedland.player.UI;
 public abstract class MonsterEntity {
 
 
+    protected String monsterName;
     protected double monsterHealth;
     protected double monsterDamage;
-
 
 
     public double getMonsterHealth() {
@@ -26,6 +26,10 @@ public abstract class MonsterEntity {
 
     public void setMonsterDamage(double monsterDamage) {
         this.monsterDamage = monsterDamage;
+    }
+
+    public String getMonsterName() {
+        return monsterName;
     }
 }
 

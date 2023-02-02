@@ -95,7 +95,7 @@ public class Story {
                     gs.popupImage.setImageResource(R.drawable.heal);
                     gs.popupText.setText("Drinking beer, increase your lost health! \n You paid " + square.beerPrice + " silver for it.");
                     gs.createPopUpWindow();
-                    ui.increaseHealth(20, gs);
+                    ui.increaseHealth(20, gs, GameScreen.HealthImg);
                     break;
 
                 } else {
@@ -137,7 +137,36 @@ public class Story {
 
                 break;
 
+            case "church":
+
+                town.Church();
+
+                break;
+            case "priest":
+
+                town.toPriest();
+
+                break;
+
+            case "stvillage":
+
+                town.southernVillage();
+
+                break;
+
+            case "witchHouse":
+
+                town.witchHouse();
+
+                break;
+
+            case "witch":
+
+                town.toWitch();
+
+                break;
         }
+
 
     }
 
@@ -146,7 +175,6 @@ public class Story {
 
         showAllButtons();
         allButtonSetDefault();
-
 
 
         gs.gameImage.setImageResource(R.drawable.map);
@@ -174,7 +202,8 @@ public class Story {
         gs.button4.setVisibility(View.VISIBLE);
 
     }
-    private void allButtonSetDefault(){
+
+    private void allButtonSetDefault() {
 
         Drawable img = ContextCompat.getDrawable(gs, R.drawable.buttons);
 

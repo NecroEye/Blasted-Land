@@ -184,6 +184,8 @@
             android:layout_marginVertical="20dp"
             android:background="@drawable/buttons"
             android:backgroundTint="#7b7b7b"
+            android:drawableLeft="@drawable/potionn"
+            android:paddingHorizontal="30dp"
             android:fontFamily="@font/header"
             android:onClick="battleButton1"
             android:text="Potion" />
@@ -200,6 +202,8 @@
                 android:layout_marginRight="80dp"
                 android:background="@drawable/buttons"
                 android:backgroundTint="#7b7b7b"
+                android:drawableLeft="@drawable/swordd"
+                android:paddingHorizontal="16dp"
                 android:fontFamily="@font/header"
                 android:onClick="battleButton2"
                 android:text="Attack" />
@@ -225,6 +229,8 @@
             android:layout_marginHorizontal="80dp"
             android:layout_marginVertical="20dp"
             android:background="@drawable/buttons"
+            android:drawableLeft="@drawable/runn"
+            android:paddingHorizontal="30dp"
             android:backgroundTint="#7b7b7b"
             android:fontFamily="@font/header"
             android:onClick="battleButton4"

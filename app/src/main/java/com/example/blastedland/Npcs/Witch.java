@@ -1,18 +1,17 @@
-package com.example.blastedland.kingdom.Npcs;
+package com.example.blastedland.Npcs;
 
 import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 
-public class Stranger implements Npc {
+public class Witch implements Npc{
 
 
+    private final String name = "Annabelle";
     private final Conversation conversation;
-    private String name = "Stranger";
-    public static boolean scroll = false;
 
+    public Witch(Conversation conversation){
 
-    public Stranger(Conversation conversation) {
         this.conversation = conversation;
 
     }
@@ -39,10 +38,4 @@ public class Stranger implements Npc {
     public String getName() {
         return name;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
 }

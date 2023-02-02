@@ -3,6 +3,8 @@ package com.example.blastedland;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,7 +33,7 @@ public class BattleArea extends AppCompatActivity {
 
 
     public ImageView heroView, monsterView, heroTurnView, monsterTurnView, popupImage;
-    public TextView monsterName, monsterHealth, descriptionText, heroHealth, heroName, popupText;
+    public TextView monsterName, monsterHealth, battleText, descriptionText, heroHealth, heroName, popupText;
     public Button choose1, choose2, choose3, choose4, popupButton;
     public MonsterAction monsterAction;
     private MonsterEntity monsterEntity;
@@ -74,6 +76,7 @@ public class BattleArea extends AppCompatActivity {
 
         heroHealth = findViewById(R.id.heroHealth1);
         heroName = findViewById(R.id.heroName);
+        battleText = findViewById(R.id.battleText);
 
         heroHealth.setText(ui.health + " Health");
 
@@ -119,6 +122,12 @@ public class BattleArea extends AppCompatActivity {
 
 
     public void monsterAttack() {
+
+        choose1.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+        choose2.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+        choose3.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+        choose4.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+
         Runnable monsterAttackTimer = new Runnable() {
             @Override
             public void run() {
@@ -130,6 +139,7 @@ public class BattleArea extends AppCompatActivity {
                             @Override
                             public void run() {
 
+
                                 if (monsterEntity.getMonsterHealth() > 0) {
 
                                     monsterAction.attack(ui, BattleArea.this);
@@ -140,12 +150,11 @@ public class BattleArea extends AppCompatActivity {
                                 if (ui.health <= 0) {
 
 
-                                    if(Build.VERSION.SDK_INT >= 26){
+                                    if (Build.VERSION.SDK_INT >= 26) {
 
                                         VibrationEffect vibrationEffect1 = VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE);
                                         vibe.vibrate(vibrationEffect1);
-                                    }
-                                    else{
+                                    } else {
                                         vibe.vibrate(1000);
                                     }
 

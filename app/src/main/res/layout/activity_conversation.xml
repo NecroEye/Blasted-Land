@@ -194,6 +194,8 @@
                     android:layout_marginVertical="10dp"
                     android:background="@drawable/buttons"
                     android:backgroundTint="#7b7b7b"
+                    android:drawableLeft="@drawable/npcdoot"
+                    android:paddingHorizontal="10dp"
                     android:fontFamily="@font/header"
                     android:onClick="hButton1"
                     android:text="Button" />
@@ -205,6 +207,8 @@
                     android:layout_marginHorizontal="10dp"
                     android:background="@drawable/buttons"
                     android:backgroundTint="#7b7b7b"
+                    android:drawableLeft="@drawable/npcdoot"
+                    android:paddingHorizontal="10dp"
                     android:fontFamily="@font/header"
                     android:onClick="hButton2"
                     android:text="Button" />
@@ -217,6 +221,8 @@
                     android:layout_marginVertical="10dp"
                     android:background="@drawable/buttons"
                     android:backgroundTint="#7b7b7b"
+                    android:drawableLeft="@drawable/npcdoot"
+                    android:paddingHorizontal="10dp"
                     android:fontFamily="@font/header"
                     android:onClick="hButton3"
                     android:text="Button" />
@@ -228,6 +234,8 @@
                     android:layout_marginHorizontal="10dp"
                     android:background="@drawable/buttons"
                     android:backgroundTint="#7b7b7b"
+                    android:drawableLeft="@drawable/exit"
+                    android:paddingHorizontal="10dp"
                     android:fontFamily="@font/header"
                     android:onClick="hButton4"
                     android:text="Button" />

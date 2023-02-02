@@ -11,4 +11,7 @@ public interface MonsterAction {
 
     void battleChoose(BattleArea battleArea, String choose);
 
+
+
+    //new monster Attack and debuff mechanics will add
 }

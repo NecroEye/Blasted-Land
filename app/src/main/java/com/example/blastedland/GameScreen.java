@@ -29,13 +29,15 @@ import com.example.blastedland.kingdom.places.Square;
 public class GameScreen extends AppCompatActivity {
 
     public TextView gameText, popupText;
-    public ImageView gameImage, healthImg, popupImage;
+    public static ImageView HealthImg;
+    public ImageView gameImage, popupImage;
     public Button button1, button2, button3, button4, popupButton;
     private Story story;
     public static TextView healthTx, moneyTx, anvilTx, keyTx, reincarnationTx;
     public static MediaPlayer maingamesong;
     private LinearLayout layout;
     private View popUpView;
+    private static boolean isOpen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class GameScreen extends AppCompatActivity {
         popupButton = popUpView.findViewById(R.id.popupButton);
 
         gameText = findViewById(R.id.gameTextView);
-        healthImg = findViewById(R.id.HealthImg);
+        HealthImg = findViewById(R.id.HealthImg);
         healthTx = findViewById(R.id.health);
         moneyTx = findViewById(R.id.money);
         anvilTx = findViewById(R.id.Anvil);
@@ -79,6 +81,7 @@ public class GameScreen extends AppCompatActivity {
 
         popupImage.setImageResource(R.drawable.necromancer);
         popupText.setText("You have been dead for unknown time, a rotten magic broke it. Right now you are once alive, don't remember anything and lost in this cursed land");
+        popupButton.setText("Next");
 
         createPopUpWindow();
 
@@ -89,6 +92,7 @@ public class GameScreen extends AppCompatActivity {
         super.onPause();
 
         maingamesong.pause();
+
 
     }
 
@@ -199,6 +203,34 @@ public class GameScreen extends AppCompatActivity {
             });
 
         }
+        else if(isOpen == false){
+
+            isOpen = true;
+
+            popupButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                    layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0));
+
+                    popupImage.setImageResource(R.drawable.memory);
+                    popupText.setText("Now your goal is seeking your lost memory and finding out why you have been come back to life");
+                    popupButton.setText("Skip");
+
+                    popupButton.setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+                        public void onClick(View view) {
+                            popupWindow.dismiss();
+                        }
+                    });
+
+                }
+            });
+
+
+        }
         else {
             popupButton.setOnClickListener(view ->  popupWindow.dismiss());
 
@@ -209,5 +241,11 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
+    public static boolean isIsOpen() {
+        return isOpen;
+    }
 
+    public static void setIsOpen(boolean isOpen) {
+        GameScreen.isOpen = isOpen;
+    }
 }

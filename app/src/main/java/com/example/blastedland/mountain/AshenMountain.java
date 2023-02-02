@@ -60,11 +60,6 @@ public class AshenMountain {
             gs.button3.setText("Read the sign"); // suddenly disappear
             gs.button4.setText("Back");
 
-         /*    savaş button iconu
-           Drawable img = ContextCompat.getDrawable(gs, R.drawable.warlock);
-           img.setBounds(10,10,20,20);
-           gs.button2.setCompoundDrawablesWithIntrinsicBounds(img.getLevel(),0,img.getLevel(),0);
-         */
 
             story.nextPosition1 = "";
             story.nextPosition2 = "dragon";

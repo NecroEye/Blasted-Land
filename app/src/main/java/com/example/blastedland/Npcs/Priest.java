@@ -1,24 +1,26 @@
-package com.example.blastedland.kingdom.Npcs;
+package com.example.blastedland.Npcs;
 
 import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 
-public class Blacksmith implements Npc {
+public class Priest implements Npc {
 
 
-    private final String name = "Bob";
-    private static boolean anvil = false;
     private final Conversation conversation;
+    private final String name = "Anton";
 
-    public Blacksmith(Conversation conversation) {
+
+    public Priest(Conversation conversation) {
 
         this.conversation = conversation;
 
     }
 
+
     @Override
     public void talking(String buttonText) {
+
 
         if (!buttonText.isEmpty()) {
             switch (buttonText) {
@@ -38,14 +40,4 @@ public class Blacksmith implements Npc {
     public String getName() {
         return name;
     }
-
-    public static boolean isAnvil() {
-        return anvil;
-    }
-
-    public static void setAnvil(boolean anvil) {
-        Blacksmith.anvil = anvil;
-    }
-
-
 }

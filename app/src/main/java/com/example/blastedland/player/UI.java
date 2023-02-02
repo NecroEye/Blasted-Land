@@ -1,5 +1,7 @@
 package com.example.blastedland.player;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -47,6 +49,10 @@ public class UI {
             battleArea.monsterHealth.setText(mainVariables.getMonsterHealth() + " Health");
             battleArea.monsterHealth.startAnimation(bounce);
             battleArea.monsterView.startAnimation(newBounce);
+            battleArea.battleText.setText(mainVariables.getMonsterName() + " was got " + basicDamage + " \n damage by you");
+            battleArea.battleText.setTextColor(Color.GREEN);
+
+
 
             battleArea.heroTurnView.setVisibility(View.INVISIBLE);
             battleArea.monsterTurnView.setVisibility(View.VISIBLE);
@@ -59,22 +65,22 @@ public class UI {
     }
 
 
-    public void phaseTransformation(GameScreen gameScreen) {
+    public void phaseTransformation(ImageView imageView) {
 
         //ImageView da bounce eklenecek fakat imageView tanımlanmadı ve isimlenmedi onu kontrol et
 
         if (health >= 20) {
 
-            gameScreen.healthImg.setImageResource(R.drawable.phase3);
+            imageView.setImageResource(R.drawable.phase3);
 
 
         } else if (health >= 10) {
 
-            gameScreen.healthImg.setImageResource(R.drawable.phase2);
+            imageView.setImageResource(R.drawable.phase2);
 
         } else {
 
-            gameScreen.healthImg.setImageResource(R.drawable.phase1);
+            imageView.setImageResource(R.drawable.phase1);
 
         }
 
@@ -109,7 +115,7 @@ public class UI {
 
     }
 
-    public void increaseHealth(double heal, GameScreen gameScreen) {
+    public void increaseHealth(double heal, GameScreen gameScreen, ImageView image) {
 
         Animation bounce = AnimationUtils.loadAnimation(gameScreen, R.anim.bounce);
 
@@ -119,7 +125,7 @@ public class UI {
             this.health = 20;
             gameScreen.healthTx.setText("= " + (int) health);
             gameScreen.healthTx.startAnimation(bounce);
-            phaseTransformation(gameScreen);
+            phaseTransformation(image);
         } else {
 
 
@@ -129,17 +135,17 @@ public class UI {
             this.health += heal;
             gameScreen.healthTx.setText("= " + (int) health);
             gameScreen.healthTx.startAnimation(bounce);
-            phaseTransformation(gameScreen);
+            phaseTransformation(image);
         }
 
 
     }
 
-    public void descreaseHealth(double damage, GameScreen gameScreen) {
+    public void descreaseHealth(double damage, GameScreen gameScreen, ImageView image) {
 
         this.health -= damage;
         gameScreen.healthTx.setText("= " + health);
-        phaseTransformation(gameScreen);
+        phaseTransformation(image);
 
     }
 

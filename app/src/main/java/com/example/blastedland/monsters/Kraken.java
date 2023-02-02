@@ -1,5 +1,7 @@
 package com.example.blastedland.monsters;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -7,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import com.example.blastedland.BattleArea;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
+import com.example.blastedland.Story;
 import com.example.blastedland.player.UI;
 
 import java.util.Random;
@@ -17,11 +20,11 @@ public class Kraken extends MonsterEntity implements MonsterAction {
 
     public Kraken(BattleArea battleArea){
 
-
+        monsterName = "Kraken";
         monsterHealth = 20;
         monsterDamage = 2;
 
-        battleArea.monsterName.setText("Kraken");
+        battleArea.monsterName.setText(monsterName);
         battleArea.monsterView.setImageResource(R.drawable.kraken);
         battleArea.monsterHealth.setText(this.monsterHealth + " Health");
     }
@@ -42,10 +45,22 @@ public class Kraken extends MonsterEntity implements MonsterAction {
             area.heroTurnView.setVisibility(View.VISIBLE);
             GameScreen.healthTx.setText("= " + ui.health);
             area.heroView.startAnimation(newBounce);
+            ui.phaseTransformation(GameScreen.HealthImg);
+            area.battleText.setText("You were got " + monsterDamage + "\n damage by " + monsterName);
+            area.battleText.setTextColor(Color.parseColor("#E97451"));
+
+
+
+
+
 
 
         }
 
+        area.choose1.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#7b7b7b")));
+        area.choose2.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#7b7b7b")));
+        area.choose3.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#7b7b7b")));
+        area.choose4.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#7b7b7b")));
 
     }
 
@@ -65,7 +80,6 @@ public class Kraken extends MonsterEntity implements MonsterAction {
                     battleArea.finish();
                     GameScreen.maingamesong.setLooping(true);
                     GameScreen.maingamesong.start();
-                    battleArea.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                     break;
                 }
@@ -76,7 +90,12 @@ public class Kraken extends MonsterEntity implements MonsterAction {
                     battleArea.monsterAttack();
                     battleArea.allButtonLocked();
                     battleArea.choose4.startAnimation(shake);
+                    battleArea.battleText.setText("You were failed escaping");
+                    battleArea.battleText.setTextColor(Color.GREEN);
 
+
+                    battleArea.heroTurnView.setVisibility(View.INVISIBLE);
+                    battleArea.monsterTurnView.setVisibility(View.VISIBLE);
 
                     break;
                 }

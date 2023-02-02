@@ -5,7 +5,6 @@ import androidx.core.content.res.ResourcesCompat;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -22,10 +21,11 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.blastedland.kingdom.Npcs.Blacksmith;
-import com.example.blastedland.kingdom.Npcs.Npc;
-import com.example.blastedland.kingdom.Npcs.Stranger;
-import com.example.blastedland.kingdom.Npcs.Thief;
+import com.example.blastedland.Npcs.Blacksmith;
+import com.example.blastedland.Npcs.Npc;
+import com.example.blastedland.Npcs.Priest;
+import com.example.blastedland.Npcs.Stranger;
+import com.example.blastedland.Npcs.Thief;
 import com.example.blastedland.player.UI;
 
 public class Conversation extends AppCompatActivity {
@@ -159,7 +159,7 @@ public class Conversation extends AppCompatActivity {
 
                 } else {
 
-                    Animation shake = AnimationUtils.loadAnimation(this,R.anim.shake);
+                    Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
                     heroButton3.setText("give it some silver (10)");
                     heroButton3.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
                     heroButton3.setClickable(false);
@@ -180,18 +180,59 @@ public class Conversation extends AppCompatActivity {
                 actions = new Blacksmith(this);
 
                 heroButton1.setVisibility(View.INVISIBLE);
+                heroButton2.setVisibility(View.INVISIBLE);
                 heroButton3.setVisibility(View.INVISIBLE);
-                heroButton4.setVisibility(View.INVISIBLE);
+
 
 
                 npcImage.setImageResource(R.drawable.elf);
                 npcTextName.setText("Blacksmith");
                 npcText.setText("I don't have job for you now, come back later.");
                 heroButton1.setText("");
-                heroButton2.setText("Back");
+                heroButton2.setText("");
                 heroButton3.setText("");
-                heroButton4.setText("");
+                heroButton4.setText("Back");
                 LocationImage.setImageResource(R.drawable.blacksmith);
+                break;
+
+            case "anton":
+
+                actions = new Priest(this);
+
+
+                npcImage.setImageResource(R.drawable.priest);
+                npcTextName.setText("Priest");
+                npcText.setText("The God blesses all of us.");
+                heroButton1.setText("");
+                heroButton2.setText("");
+                heroButton3.setText("");
+                heroButton4.setText("Back");
+                LocationImage.setImageResource(R.drawable.church);
+
+                heroButton1.setVisibility(View.INVISIBLE);
+                heroButton2.setVisibility(View.INVISIBLE);
+                heroButton3.setVisibility(View.INVISIBLE);
+
+                break;
+
+            case "annabelle":
+
+                actions = new Priest(this);
+
+
+                npcImage.setImageResource(R.drawable.witch);
+                npcTextName.setText("Witch");
+                npcText.setText("Soo, you are looking for some curse or not?.");
+                heroButton1.setText("");
+                heroButton2.setText("");
+                heroButton3.setText("");
+                heroButton4.setText("Back");
+                LocationImage.setImageResource(R.drawable.hut);
+
+                heroButton1.setVisibility(View.INVISIBLE);
+                heroButton2.setVisibility(View.INVISIBLE);
+                heroButton3.setVisibility(View.INVISIBLE);
+
                 break;
 
         }

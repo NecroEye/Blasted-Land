@@ -1,32 +1,19 @@
-package com.example.blastedland.kingdom.Npcs;
+package com.example.blastedland.Npcs;
 
 import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 
-public class Thief implements Npc{
+public class Stranger implements Npc {
 
 
-    private final String name = "Vigil";
-    private boolean firstApproach = true;
     private final Conversation conversation;
+    private String name = "Stranger";
+    public static boolean scroll = false;
 
 
-    public Thief(Conversation conversation) {
-
+    public Stranger(Conversation conversation) {
         this.conversation = conversation;
-
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-
-
-    public void firstEncounter() {
-
 
     }
 
@@ -41,13 +28,18 @@ public class Thief implements Npc{
                     conversation.finish();
                     GameScreen.maingamesong.setLooping(true);
                     GameScreen.maingamesong.start();
-                    conversation.overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+                    conversation.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                     break;
 
             }
         }
 
     }
+
+    public String getName() {
+        return name;
+    }
+
 
 
 }
