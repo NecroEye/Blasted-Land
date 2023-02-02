@@ -112,17 +112,17 @@ public class Conversation extends AppCompatActivity {
                     createPopUpWindow();
 
                     heroButton1.setVisibility(View.INVISIBLE);
+                    heroButton2.setVisibility(View.INVISIBLE);
                     heroButton3.setVisibility(View.INVISIBLE);
-                    heroButton4.setVisibility(View.INVISIBLE);
 
 
                     npcImage.setImageResource(R.drawable.stranger);
                     npcTextName.setText("Stranger");
                     npcText.setText("Do you want something");
                     heroButton1.setText("");
-                    heroButton2.setText("Back");
+                    heroButton2.setText("");
                     heroButton3.setText("");
-                    heroButton4.setText("");
+                    heroButton4.setText("Back");
                     LocationImage.setImageResource(R.drawable.tavern);
                     break;
                 } else {
