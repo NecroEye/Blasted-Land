@@ -19,7 +19,10 @@ public class UI {
 
     public double health = 20.00;
     public double basicDamage = 3.25;
+    public double powerfulDamage = basicDamage * 2;
+    public static int powerfulAmount = 2;
     public int silver = 0;
+    public int potionAmount = 1;
     public byte key = 0;
     public byte reincarnation = 0;
     private static UI ui;
@@ -53,11 +56,49 @@ public class UI {
             battleArea.battleText.setTextColor(Color.GREEN);
 
 
+            battleArea.heroTurnView.setVisibility(View.INVISIBLE);
+            battleArea.monsterTurnView.setVisibility(View.VISIBLE);
+
+
+        }
+
+
+    }
+
+
+    public void CritHeroAttack(MonsterEntity mainVariables, BattleArea battleArea) {
+
+        Animation bounce = AnimationUtils.loadAnimation(battleArea, R.anim.bounce);
+        Animation newBounce = AnimationUtils.loadAnimation(battleArea, R.anim.diffshake);
+
+
+        if (mainVariables.getMonsterHealth() > 0 && health > 0 && powerfulAmount > 0) {
+
+            powerfulAmount -= 1;
+            battleArea.choose3.setText("Power " + "(" + powerfulAmount + ")");
+
+            mainVariables.setMonsterHealth(mainVariables.getMonsterHealth() - powerfulDamage);
+            battleArea.monsterHealth.setText(mainVariables.getMonsterHealth() + " Health");
+            battleArea.monsterHealth.startAnimation(bounce);
+            battleArea.monsterView.startAnimation(newBounce);
+            battleArea.battleText.setText(mainVariables.getMonsterName() + " was got " + powerfulDamage + " \n damage by you");
+            battleArea.battleText.setTextColor(Color.GREEN);
+
 
             battleArea.heroTurnView.setVisibility(View.INVISIBLE);
             battleArea.monsterTurnView.setVisibility(View.VISIBLE);
 
 
+        } else {
+
+            battleArea.battleText.setText("You aren't able to powerful attack anymore.");
+            battleArea.battleText.setTextColor(Color.GREEN);
+
+            Animation shake = AnimationUtils.loadAnimation(battleArea, R.anim.shake);
+            battleArea.choose3.startAnimation(shake);
+
+            battleArea.heroTurnView.setVisibility(View.INVISIBLE);
+            battleArea.monsterTurnView.setVisibility(View.VISIBLE);
 
         }
 

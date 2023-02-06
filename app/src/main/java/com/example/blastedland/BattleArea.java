@@ -24,9 +24,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.blastedland.monsters.Dragon;
+import com.example.blastedland.monsters.Giant;
 import com.example.blastedland.monsters.Kraken;
 import com.example.blastedland.monsters.MonsterAction;
 import com.example.blastedland.monsters.MonsterEntity;
+import com.example.blastedland.player.Potion;
 import com.example.blastedland.player.UI;
 
 public class BattleArea extends AppCompatActivity {
@@ -94,6 +96,10 @@ public class BattleArea extends AppCompatActivity {
         player.setLooping(true);
         player.start();
 
+        choose1.setText("Potion " + "(" + ui.potionAmount + ")");
+        choose3.setText("Power " + "(" + ui.powerfulAmount + ")");
+
+
 
         String monster = getIntent().getStringExtra("monster");
 
@@ -107,6 +113,12 @@ public class BattleArea extends AppCompatActivity {
             case "dragon":
                 monsterAction = new Dragon(this);
                 monsterEntity = new Dragon(this);
+                break;
+            case "giant":
+
+                monsterAction = new Giant(this);
+                monsterEntity = new Giant(this);
+
                 break;
 
         }
@@ -169,7 +181,21 @@ public class BattleArea extends AppCompatActivity {
 
                                     allButtonLocked();
                                     popupImage.setImageResource(R.drawable.money_bag);
-                                    popupText.setText("You Won! \n You have earned 20 silver!");
+
+                                    if(monsterEntity instanceof Dragon){
+
+                                        popupText.setText("You Won! \n You have earned 35 silver!");
+                                        Dragon.isKilledBefore = true;
+
+                                    }else if(monsterEntity instanceof Kraken){
+
+                                        popupText.setText("You Won! \n You have earned 20 silver!");
+
+                                    }else if(monsterEntity instanceof Giant){
+
+                                        popupText.setText("You Won! \n You have earned 27 silver!");
+                                    }
+
                                     popupButton.setText("Take");
 
                                     createPopUpWindow();
@@ -190,6 +216,9 @@ public class BattleArea extends AppCompatActivity {
 
     public void battleButton1(View v) {
 
+        Potion potion = new Potion(this);
+        potion.HealingByPotion();
+        monsterAttack();
 
     }
 
@@ -197,15 +226,16 @@ public class BattleArea extends AppCompatActivity {
 
 
         monsterAttack();
-
         allButtonLocked();
-
         ui.heroAttack(monsterEntity, this);
 
 
     }
 
     public void battleButton3(View v) {
+
+        ui.CritHeroAttack(monsterEntity,this);
+        monsterAttack();
 
     }
 
@@ -256,8 +286,25 @@ public class BattleArea extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    ui.silver += 20;
-                    GameScreen.moneyTx.setText("= " + ui.silver);
+                    if(monsterEntity instanceof Dragon){
+
+                        UI.powerfulAmount = 2;
+                        ui.silver += 35;
+                        GameScreen.moneyTx.setText("=" + ui.silver);
+
+                    }
+                    else if(monsterEntity instanceof Kraken){
+
+                        UI.powerfulAmount = 2;
+                        ui.silver += 20;
+                        GameScreen.moneyTx.setText("=" + ui.silver);
+                    }
+                    else if(monsterEntity instanceof Giant){
+
+                        UI.powerfulAmount = 2;
+                        ui.silver += 27;
+                        GameScreen.moneyTx.setText("=" + ui.silver);
+                    }
 
                     popupWindow.dismiss();
                     layout.removeView(popUpView);

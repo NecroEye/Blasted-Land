@@ -213,11 +213,13 @@
                 android:layout_width="140dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
+                android:drawableLeft="@drawable/power"
+                android:paddingHorizontal="16dp"
                 android:background="@drawable/buttons"
                 android:backgroundTint="#7b7b7b"
                 android:fontFamily="@font/header"
                 android:onClick="battleButton3"
-                android:text="Defans" />
+                android:text="Power" />
 
 
         </LinearLayout>

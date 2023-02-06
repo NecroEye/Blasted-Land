@@ -22,17 +22,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.blastedland.Npcs.Blacksmith;
+import com.example.blastedland.Npcs.King;
 import com.example.blastedland.Npcs.Npc;
 import com.example.blastedland.Npcs.Priest;
 import com.example.blastedland.Npcs.Stranger;
 import com.example.blastedland.Npcs.Thief;
+import com.example.blastedland.Npcs.Witch;
+import com.example.blastedland.Npcs.WorshiperVillager;
 import com.example.blastedland.player.UI;
 
 public class Conversation extends AppCompatActivity {
 
 
-    public ImageView npcImage, LocationImage, popupImage;
-    public TextView npcText, npcTextName, popupText;
+    public ImageView npcImage, LocationImage, popupImage, healthImg;
+    public TextView npcText, npcTextName, popupText, healthText, moneyText, anvilText, keyText, ressText;
     public Button heroButton1, heroButton2, heroButton3, heroButton4, popupButton;
     private String specialWord;
     public Blacksmith blacksmith;
@@ -49,8 +52,16 @@ public class Conversation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversation);
 
+        healthText = findViewById(R.id.health);
+        moneyText = findViewById(R.id.money);
+        anvilText = findViewById(R.id.Anvil);
+        keyText = findViewById(R.id.Key);
+        ressText = findViewById(R.id.Reincarnation);
+        healthImg = findViewById(R.id.HealthImg);
+
         blacksmith = new Blacksmith(this);
         this.ui = UI.getInstance();
+
 
         player = MediaPlayer.create(this, R.raw.chatsong);
         player.setLooping(true);
@@ -85,6 +96,7 @@ public class Conversation extends AppCompatActivity {
                 npcText.setTypeface(typeface);
 
                 actions = new Blacksmith(this);
+                setVisuals();
 
                 npcImage.setImageResource(R.drawable.elf);
                 npcTextName.setText("Blacksmith");
@@ -99,6 +111,7 @@ public class Conversation extends AppCompatActivity {
             case "stranger":
 
                 actions = new Stranger(this);
+                setVisuals();
 
 
                 if (Stranger.scroll == false) {
@@ -146,6 +159,7 @@ public class Conversation extends AppCompatActivity {
             case "thief":
 
                 actions = new Thief(this);
+                setVisuals();
 
 
                 typeface = ResourcesCompat.getFont(this, R.font.punk);
@@ -178,11 +192,12 @@ public class Conversation extends AppCompatActivity {
             case "armorerJob":
 
                 actions = new Blacksmith(this);
+                setVisuals();
+
 
                 heroButton1.setVisibility(View.INVISIBLE);
                 heroButton2.setVisibility(View.INVISIBLE);
                 heroButton3.setVisibility(View.INVISIBLE);
-
 
 
                 npcImage.setImageResource(R.drawable.elf);
@@ -198,6 +213,7 @@ public class Conversation extends AppCompatActivity {
             case "anton":
 
                 actions = new Priest(this);
+                setVisuals();
 
 
                 npcImage.setImageResource(R.drawable.priest);
@@ -217,21 +233,57 @@ public class Conversation extends AppCompatActivity {
 
             case "annabelle":
 
-                actions = new Priest(this);
-
+                actions = new Witch(this);
+                setVisuals();
 
                 npcImage.setImageResource(R.drawable.witch);
                 npcTextName.setText("Witch");
                 npcText.setText("Soo, you are looking for some curse or not?.");
-                heroButton1.setText("");
-                heroButton2.setText("");
+                heroButton1.setText("Buy a Potion(5)");
+                heroButton2.setText("Explain your situation");
                 heroButton3.setText("");
                 heroButton4.setText("Back");
                 LocationImage.setImageResource(R.drawable.hut);
 
+
+                heroButton3.setVisibility(View.INVISIBLE);
+
+                break;
+
+            case "king":
+
+
+                actions = new King(this);
+                setVisuals();
+
+                npcImage.setImageResource(R.drawable.king);
+                npcTextName.setText("King");
+                npcText.setText("The man who slaughtered the dragon, you are my honoured guest \n but don't forget there is more where they came from.");
+                heroButton1.setText("");
+                heroButton2.setText("");
+                heroButton3.setText("");
+                heroButton4.setText("Back");
+                LocationImage.setImageResource(R.drawable.castle);
+
                 heroButton1.setVisibility(View.INVISIBLE);
                 heroButton2.setVisibility(View.INVISIBLE);
                 heroButton3.setVisibility(View.INVISIBLE);
+
+                break;
+            case "villager":
+
+                actions = new WorshiperVillager(this);
+                setVisuals();
+
+                npcImage.setImageResource(R.drawable.villager);
+                npcTextName.setText("Worshiper Villager");
+                npcText.setText("Believing something is everything, if you don't believe anything, \n You are being like lost in the maze.");
+                heroButton1.setText("Why do you need to believe something?");
+                heroButton2.setText("Bullshit, you are just aberrant!");
+                heroButton3.setText("All Hail the Ctulhu!");
+                heroButton4.setText("Back");
+                LocationImage.setImageResource(R.drawable.church);
+
 
                 break;
 
@@ -249,32 +301,43 @@ public class Conversation extends AppCompatActivity {
 
     public void hButton1(View v) {
 
+        Animation bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
+
         specialWord = heroButton1.getText().toString();
-        actions.talking(specialWord);
-        animateAllButtons();
+        actions.talking(specialWord, this);
+        heroButton1.startAnimation(bounce);
 
     }
 
     public void hButton2(View v) {
 
+        Animation bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
+
         specialWord = heroButton2.getText().toString();
-        actions.talking(specialWord);
-        animateAllButtons();
+        actions.talking(specialWord, this);
+        heroButton2.startAnimation(bounce);
+
 
     }
 
     public void hButton3(View v) {
 
+        Animation bounce = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
+
         specialWord = heroButton3.getText().toString();
-        actions.talking(specialWord);
-        animateAllButtons();
+        actions.talking(specialWord, this);
+        heroButton3.startAnimation(bounce);
+
 
     }
 
     public void hButton4(View v) {
 
         specialWord = heroButton4.getText().toString();
-        actions.talking(specialWord);
+        actions.talking(specialWord, this);
         Animation moveAni = AnimationUtils.loadAnimation(this, R.anim.movebutton);
         heroButton4.startAnimation(moveAni);
 
@@ -290,22 +353,13 @@ public class Conversation extends AppCompatActivity {
 
     }
 
-    private void animateAllButtons() {
-
-        Animation moveAni = AnimationUtils.loadAnimation(this, R.anim.movebutton);
-        heroButton1.startAnimation(moveAni);
-        heroButton2.startAnimation(moveAni);
-        heroButton3.startAnimation(moveAni);
-
-
-    }
 
     public String getSpecialWord() {
         return specialWord;
 
     }
 
-    private void createPopUpWindow() {
+    public void createPopUpWindow() {
 
 
         int width = ViewGroup.LayoutParams.MATCH_PARENT;
@@ -318,6 +372,16 @@ public class Conversation extends AppCompatActivity {
 
 
         popupButton.setOnClickListener(view -> popupWindow.dismiss());
+
+    }
+
+    public void setVisuals() {
+
+        ui.phaseTransformation(healthImg);
+        healthText.setText("=" + ui.health);
+        moneyText.setText("=" + ui.silver);
+
+        keyText.setText("X" + ui.key);
 
     }
 }

@@ -60,14 +60,14 @@ public class Town {
         gameScreen.gameImage.setImageResource(R.drawable.church);
         gameScreen.gameText.setText("You are in church, probably something has doing here");
 
-        gameScreen.button1.setText("talk to priest");
-        gameScreen.button2.setText("");
+        gameScreen.button1.setText("talk to Priest");
+        gameScreen.button2.setText("talk to Villager");
         gameScreen.button3.setText("");
         gameScreen.button4.setText("Leave Church");
 
 
         story.nextPosition1 = "priest";
-        story.nextPosition2 = "";
+        story.nextPosition2 = "villager";
         story.nextPosition3 = "";
         story.nextPosition4 = "village";
 
@@ -87,7 +87,7 @@ public class Town {
 
 
         story.nextPosition1 = "witchHouse";
-        story.nextPosition2 = "";
+        story.nextPosition2 = "giant";
         story.nextPosition3 = "well";
         story.nextPosition4 = "village";
 
@@ -126,9 +126,9 @@ public class Town {
 
         String npc = "annabelle";
 
-        Intent chatScreen = new Intent(gameScreen, Conversation.class);
-        chatScreen.putExtra("npc", npc);
-        gameScreen.startActivity(chatScreen);
+        Intent battleScreen = new Intent(gameScreen, Conversation.class);
+        battleScreen.putExtra("npc", npc);
+        gameScreen.startActivity(battleScreen);
         gameScreen.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 
@@ -136,10 +136,33 @@ public class Town {
 
         String monster = "kraken";
 
-        Intent chatScreen = new Intent(gameScreen, BattleArea.class);
-        chatScreen.putExtra("monster", monster);
-        gameScreen.startActivity(chatScreen);
+        Intent battleScreen = new Intent(gameScreen, BattleArea.class);
+        battleScreen.putExtra("monster", monster);
+        gameScreen.startActivity(battleScreen);
         gameScreen.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+    }
+    public void toGiant(){
+
+        String monster = "giant";
+
+        Intent battleScreen = new Intent(gameScreen,BattleArea.class);
+        battleScreen.putExtra("monster",monster);
+        gameScreen.startActivity(battleScreen);
+        gameScreen.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
+
+
+
+    }
+    public void toVillager(){
+
+        String npc = "villager";
+
+        Intent battleScreen = new Intent(gameScreen, Conversation.class);
+        battleScreen.putExtra("npc", npc);
+        gameScreen.startActivity(battleScreen);
+        gameScreen.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
     }
 

@@ -4,18 +4,21 @@ import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 
-public class Blacksmith implements Npc {
+public class WorshiperVillager implements Npc{
 
 
-    private final String name = "Bob";
-    private static boolean anvil = false;
-    private final Conversation conversation;
+    private final String name = "Worshiper Villager";
+    private Conversation conversation;
 
-    public Blacksmith(Conversation conversation) {
 
-        this.conversation = conversation;
+
+    public WorshiperVillager(Conversation conversation){
+
+        this.conversation =  conversation;
 
     }
+
+
 
     @Override
     public void talking(String buttonText, Conversation conversation) {
@@ -35,17 +38,8 @@ public class Blacksmith implements Npc {
 
     }
 
+
     public String getName() {
         return name;
     }
-
-    public static boolean isAnvil() {
-        return anvil;
-    }
-
-    public static void setAnvil(boolean anvil) {
-        Blacksmith.anvil = anvil;
-    }
-
-
 }

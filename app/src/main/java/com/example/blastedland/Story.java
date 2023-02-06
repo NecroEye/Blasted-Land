@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.blastedland.dungeon.CursedDungeon;
 import com.example.blastedland.kingdom.places.Square;
+import com.example.blastedland.monsters.Dragon;
 import com.example.blastedland.mountain.AshenMountain;
 import com.example.blastedland.player.UI;
 import com.example.blastedland.village.Town;
@@ -75,7 +76,10 @@ public class Story {
                 square.toThief();
                 break;
             case "king":
-                square.KingCastle();
+
+                if (Dragon.isKilledBefore == false) square.KingCastle();
+                else square.toKing();
+
                 break;
 
             case "shinyArmor":
@@ -163,6 +167,15 @@ public class Story {
             case "witch":
 
                 town.toWitch();
+
+                break;
+            case "giant":
+                town.toGiant();
+                break;
+
+            case "villager":
+
+                town.toVillager();
 
                 break;
         }

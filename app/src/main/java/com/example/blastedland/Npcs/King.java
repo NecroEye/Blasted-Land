@@ -4,14 +4,13 @@ import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 
-public class Blacksmith implements Npc {
+public class King implements Npc {
 
 
-    private final String name = "Bob";
-    private static boolean anvil = false;
-    private final Conversation conversation;
+    private final String name = "king";
+    private Conversation conversation;
 
-    public Blacksmith(Conversation conversation) {
+    public King(Conversation conversation){
 
         this.conversation = conversation;
 
@@ -33,19 +32,10 @@ public class Blacksmith implements Npc {
             }
         }
 
+
     }
 
     public String getName() {
         return name;
     }
-
-    public static boolean isAnvil() {
-        return anvil;
-    }
-
-    public static void setAnvil(boolean anvil) {
-        Blacksmith.anvil = anvil;
-    }
-
-
 }

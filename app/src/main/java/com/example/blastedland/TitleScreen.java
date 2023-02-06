@@ -13,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.blastedland.monsters.Dragon;
 import com.example.blastedland.mountain.AshenMountain;
+import com.example.blastedland.player.UI;
 
 public class TitleScreen extends AppCompatActivity {
 
@@ -48,6 +50,8 @@ public class TitleScreen extends AppCompatActivity {
 
     public void toGameScreen(View v) {
 
+        UI.powerfulAmount = 2;
+        Dragon.isKilledBefore = false;
         GameScreen.setIsOpen(false);
         AshenMountain.isSeen = false;
         AshenMountain.place1 = "";

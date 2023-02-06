@@ -132,7 +132,7 @@ public class Square {
     public void KingCastle() {
 
         gs.gameImage.setImageResource(R.drawable.knight);
-        gs.gameText.setText("you don't have permission to confort the king!");
+        gs.gameText.setText("you don't have permission to confort the king! \n unless kill the dragon at Ashen Mountain");
 
         gs.button1.setVisibility(View.INVISIBLE);
         gs.button3.setVisibility(View.INVISIBLE);
@@ -149,6 +149,16 @@ public class Square {
         story.nextPosition2 = "kingdom";
         story.nextPosition3 = "";
         story.nextPosition4 = "";
+    }
+    public void toKing() {
+
+        String npc = "king";
+
+        Intent chatScreen = new Intent(gs, Conversation.class);
+        chatScreen.putExtra("npc", npc);
+        gs.startActivity(chatScreen);
+        gs.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
     }
 
     public void toBlacksmith() {

@@ -26,7 +26,7 @@ public class Thief implements Npc{
 
 
     @Override
-    public void talking(String buttonText) {
+    public void talking(String buttonText, Conversation conversation) {
 
         if (!buttonText.isEmpty()) {
             switch (buttonText) {

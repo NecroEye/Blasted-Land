@@ -7,6 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.example.blastedland.BattleArea;
+import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.player.UI;
@@ -15,6 +16,9 @@ import java.util.Random;
 
 public class Dragon extends MonsterEntity implements MonsterAction {
 
+
+
+    public static boolean isKilledBefore = false;
 
     public Dragon(BattleArea battleArea) {
 
@@ -29,8 +33,11 @@ public class Dragon extends MonsterEntity implements MonsterAction {
     }
 
 
+
     @Override
     public void attack(UI ui, BattleArea area) {
+
+
 
         Animation bounce = AnimationUtils.loadAnimation(area, R.anim.bounce);
         Animation newBounce = AnimationUtils.loadAnimation(area, R.anim.diffshake);
@@ -43,15 +50,11 @@ public class Dragon extends MonsterEntity implements MonsterAction {
             area.heroHealth.startAnimation(bounce);
             area.monsterTurnView.setVisibility(View.INVISIBLE);
             area.heroTurnView.setVisibility(View.VISIBLE);
-            GameScreen.healthTx.setText("= " + ui.health);
+            GameScreen.healthTx.setText("=" + ui.health);
             area.heroView.startAnimation(newBounce);
             ui.phaseTransformation(GameScreen.HealthImg);
             area.battleText.setText("You were got " + monsterDamage + " \n damage by " + monsterName);
             area.battleText.setTextColor(Color.parseColor("#E97451"));
-
-
-
-
 
 
 
@@ -77,6 +80,7 @@ public class Dragon extends MonsterEntity implements MonsterAction {
 
                 if (chanceOfEscaping == 2) {
 
+                    UI.powerfulAmount = 2;
                     battleArea.finish();
                     GameScreen.maingamesong.setLooping(true);
                     GameScreen.maingamesong.start();
