@@ -3,14 +3,15 @@ package com.example.blastedland.village;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
-
 import androidx.core.content.ContextCompat;
-
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.blastedland.BattleArea;
 import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.Story;
+import com.example.blastedland.monsters.Giant;
 
 public class Town {
 
@@ -39,6 +40,7 @@ public class Town {
         gameScreen.button3.setText("Coast Side");
         gameScreen.button4.setText("Leave the Town");
 
+        gameScreen.button2.setVisibility(View.VISIBLE);
 
         story.nextPosition1 = "church";
         story.nextPosition2 = "stvillage";
@@ -62,7 +64,7 @@ public class Town {
 
         gameScreen.button1.setText("talk to Priest");
         gameScreen.button2.setText("talk to Villager");
-        gameScreen.button3.setText("");
+        gameScreen.button3.setText("Repenting");
         gameScreen.button4.setText("Leave Church");
 
 
@@ -81,7 +83,19 @@ public class Town {
         gameScreen.gameText.setText("Looks like this place is ominous");
 
         gameScreen.button1.setText("Witch's Hut");
-        gameScreen.button2.setText("Follow Giant's tracks"); // belki burası witchle konuştuğumuzda açılacak ve tıkladığımızda animasyonla ismi değişecek devin bölgesi veya ini gibi
+
+        if (Giant.isGiantFounded) {
+
+            gameScreen.button2.setText("Follow Giant's tracks");
+            gameScreen.button2.setVisibility(View.VISIBLE);
+
+
+        } else {
+            gameScreen.button2.setVisibility(View.GONE);
+
+        }
+
+
         gameScreen.button3.setText("Look into well");
         gameScreen.button4.setText("Leave Southern Village");
 
@@ -92,7 +106,8 @@ public class Town {
         story.nextPosition4 = "village";
 
     }
-    public void witchHouse(){
+
+    public void witchHouse() {
 
         gameScreen.gameImage.setImageResource(R.drawable.hut);
         gameScreen.gameText.setText("You are nearly Witch's hut, wanna go in?");
@@ -104,6 +119,9 @@ public class Town {
 
         gameScreen.button1.setVisibility(View.INVISIBLE);
         gameScreen.button4.setVisibility(View.INVISIBLE);
+
+        gameScreen.button2.setVisibility(View.VISIBLE);
+
 
         story.nextPosition1 = "";
         story.nextPosition2 = "witch";
@@ -142,20 +160,20 @@ public class Town {
         gameScreen.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
     }
-    public void toGiant(){
+
+    public void toGiant() {
 
         String monster = "giant";
 
-        Intent battleScreen = new Intent(gameScreen,BattleArea.class);
-        battleScreen.putExtra("monster",monster);
+        Intent battleScreen = new Intent(gameScreen, BattleArea.class);
+        battleScreen.putExtra("monster", monster);
         gameScreen.startActivity(battleScreen);
         gameScreen.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
 
-
-
     }
-    public void toVillager(){
+
+    public void toVillager() {
 
         String npc = "villager";
 

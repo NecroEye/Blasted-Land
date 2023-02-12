@@ -13,16 +13,24 @@ import com.example.blastedland.R;
 import com.example.blastedland.Story;
 import com.example.blastedland.player.UI;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Kraken extends MonsterEntity implements MonsterAction {
+
+
 
 
     public Kraken(BattleArea battleArea) {
 
         monsterName = "Kraken";
         monsterHealth = 20;
-        monsterDamage = 2;
+
+        RandomizeDamage.add(1.50);
+        RandomizeDamage.add(1.75);
+        RandomizeDamage.add(2.00);
+        RandomizeDamage.add(2.25);
+
 
         battleArea.monsterName.setText(monsterName);
         battleArea.monsterView.setImageResource(R.drawable.kraken);
@@ -32,13 +40,17 @@ public class Kraken extends MonsterEntity implements MonsterAction {
     @Override
     public void attack(UI ui, BattleArea area) {
 
+        Random randomDamageSelector = new Random();
+
+        int selected = randomDamageSelector.nextInt(4);
+
         Animation bounce = AnimationUtils.loadAnimation(area, R.anim.bounce);
         Animation newBounce = AnimationUtils.loadAnimation(area, R.anim.diffshake);
 
 
         if (ui.health > 0 && monsterHealth > 0) {
 
-            ui.health -= monsterDamage;
+            ui.health -= RandomizeDamage.get(selected);
             area.heroHealth.setText(ui.health + " Health");
             area.heroHealth.startAnimation(bounce);
             area.monsterTurnView.setVisibility(View.INVISIBLE);
@@ -46,7 +58,7 @@ public class Kraken extends MonsterEntity implements MonsterAction {
             GameScreen.healthTx.setText("=" + ui.health);
             area.heroView.startAnimation(newBounce);
             ui.phaseTransformation(GameScreen.HealthImg);
-            area.battleText.setText("You were got " + monsterDamage + "\n damage by " + monsterName);
+            area.battleText.setText("You were got " + RandomizeDamage.get(selected) + "\n damage by " + monsterName);
             area.battleText.setTextColor(Color.parseColor("#E97451"));
 
            // conversation.moneyText.setText("= " + ui.silver);

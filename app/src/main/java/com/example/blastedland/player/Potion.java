@@ -5,6 +5,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.blastedland.BattleArea;
 import com.example.blastedland.R;
 
@@ -42,6 +44,11 @@ public class Potion {
           battleArea.heroHealth.setText(ui.health + " Health");
           battleArea.battleText.setText("You used a potion, \n it has raised your health " + potionHeal);
           battleArea.battleText.setTextColor(Color.GREEN);
+          battleArea.allButtonLocked();
+          YoYo.with(Techniques.RubberBand).delay(50).duration(150).playOn(battleArea.choose1);
+
+
+
 
           battleArea.heroTurnView.setVisibility(View.INVISIBLE);
           battleArea.monsterTurnView.setVisibility(View.VISIBLE);
@@ -49,8 +56,11 @@ public class Potion {
       }
       else{
 
+
           Animation shake = AnimationUtils.loadAnimation(battleArea, R.anim.shake);
           battleArea.choose1.startAnimation(shake);
+          battleArea.allButtonLocked();
+
 
           battleArea.battleText.setText("You don't possess a potion");
           battleArea.battleText.setTextColor(Color.GREEN);

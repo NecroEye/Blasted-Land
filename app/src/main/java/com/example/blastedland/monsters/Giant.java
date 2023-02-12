@@ -11,19 +11,28 @@ import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.player.UI;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Giant extends MonsterEntity implements MonsterAction{
 
 
-    public static boolean isGainedItsHead = false;
+    public static boolean isGainedItsHead = false, isGiantFounded = false;
+
+
 
 
     public Giant(BattleArea battleArea){
 
         monsterName = "Giant";
         monsterHealth = 35;
-        monsterDamage = 2.5;
+
+        RandomizeDamage.add(1.0);
+        RandomizeDamage.add(1.25);
+        RandomizeDamage.add(1.50);
+        RandomizeDamage.add(1.75);
+
+
 
         battleArea.monsterName.setText(monsterName);
         battleArea.monsterView.setImageResource(R.drawable.giant);
@@ -37,6 +46,10 @@ public class Giant extends MonsterEntity implements MonsterAction{
     @Override
     public void attack(UI ui, BattleArea area) {
 
+        Random randomDamageSelector = new Random();
+
+        int selected = randomDamageSelector.nextInt(4);
+
 
         Animation bounce = AnimationUtils.loadAnimation(area, R.anim.bounce);
         Animation newBounce = AnimationUtils.loadAnimation(area, R.anim.diffshake);
@@ -44,7 +57,7 @@ public class Giant extends MonsterEntity implements MonsterAction{
 
         if (ui.health > 0 && monsterHealth > 0) {
 
-            ui.health -= monsterDamage;
+            ui.health -= RandomizeDamage.get(selected);
             area.heroHealth.setText(ui.health + " Health");
             area.heroHealth.startAnimation(bounce);
             area.monsterTurnView.setVisibility(View.INVISIBLE);
@@ -52,7 +65,7 @@ public class Giant extends MonsterEntity implements MonsterAction{
             GameScreen.healthTx.setText("=" + ui.health);
             area.heroView.startAnimation(newBounce);
             ui.phaseTransformation(GameScreen.HealthImg);
-            area.battleText.setText("You were got " + monsterDamage + " \n damage by " + monsterName);
+            area.battleText.setText("You were got " + RandomizeDamage.get(selected) + " \n damage by " + monsterName);
             area.battleText.setTextColor(Color.parseColor("#E97451"));
 
 

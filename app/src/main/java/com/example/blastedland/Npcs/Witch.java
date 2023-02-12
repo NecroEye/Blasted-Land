@@ -8,6 +8,7 @@ import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.Story;
+import com.example.blastedland.monsters.Giant;
 import com.example.blastedland.player.UI;
 import com.example.blastedland.village.Town;
 
@@ -86,6 +87,7 @@ public class Witch implements Npc {
                     conversation.popupImage.setImageResource(R.drawable.giantskull);
                     conversation.popupText.setText("The Quest is Accepted! \n Kill the Giant at Southern Village. \n and bring back to its skull to Witch");
                     conversation.createPopUpWindow();
+                    Giant.isGiantFounded = true;
 
                     conversation.npcText.setText("Then have a good giant hunt!");
                     conversation.heroButton2.setVisibility(View.INVISIBLE);

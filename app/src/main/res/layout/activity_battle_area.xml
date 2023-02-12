@@ -148,6 +148,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/topborder"
                 android:fontFamily="@font/header"
+                android:maxLength="11"
                 android:paddingStart="10dp"
                 android:text="20 Health"
                 android:textSize="20sp" />
@@ -160,6 +161,7 @@
                 android:background="@drawable/topborder"
                 android:fontFamily="@font/header"
                 android:gravity="right"
+                android:maxLength="11"
                 android:paddingEnd="10dp"
                 android:text="20 Health"
                 android:textSize="20sp" />

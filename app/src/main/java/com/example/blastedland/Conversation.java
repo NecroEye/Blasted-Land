@@ -103,7 +103,7 @@ public class Conversation extends AppCompatActivity {
                 npcText.setText("Welcome to my gorgeous store!");
                 heroButton1.setText("Hey");
                 heroButton2.setText("i am looking for job");
-                heroButton3.setText("have you any advice?");
+                heroButton3.setText("do you have any advice?");
                 heroButton4.setText("Back");
                 LocationImage.setImageResource(R.drawable.blacksmith);
                 break;
@@ -173,7 +173,7 @@ public class Conversation extends AppCompatActivity {
 
                 } else {
 
-                    Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+
                     heroButton3.setText("give it some silver (10)");
                     heroButton3.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
                     heroButton3.setClickable(false);
@@ -203,9 +203,9 @@ public class Conversation extends AppCompatActivity {
                 npcImage.setImageResource(R.drawable.elf);
                 npcTextName.setText("Blacksmith");
                 npcText.setText("I don't have job for you now, come back later.");
-                heroButton1.setText("");
-                heroButton2.setText("");
-                heroButton3.setText("");
+                heroButton1.setText("It will be added");
+                heroButton2.setText("It will be added");
+                heroButton3.setText("It will be added");
                 heroButton4.setText("Back");
                 LocationImage.setImageResource(R.drawable.blacksmith);
                 break;
@@ -219,9 +219,9 @@ public class Conversation extends AppCompatActivity {
                 npcImage.setImageResource(R.drawable.priest);
                 npcTextName.setText("Priest");
                 npcText.setText("The God blesses all of us.");
-                heroButton1.setText("");
-                heroButton2.setText("");
-                heroButton3.setText("");
+                heroButton1.setText("It will be added");
+                heroButton2.setText("It will be added");
+                heroButton3.setText("It will be added");
                 heroButton4.setText("Back");
                 LocationImage.setImageResource(R.drawable.church);
 
@@ -259,9 +259,9 @@ public class Conversation extends AppCompatActivity {
                 npcImage.setImageResource(R.drawable.king);
                 npcTextName.setText("King");
                 npcText.setText("The man who slaughtered the dragon, you are my honoured guest \n but don't forget there is more where they came from.");
-                heroButton1.setText("");
-                heroButton2.setText("");
-                heroButton3.setText("");
+                heroButton1.setText("It will be added");
+                heroButton2.setText("It will be added");
+                heroButton3.setText("It will be added");
                 heroButton4.setText("Back");
                 LocationImage.setImageResource(R.drawable.castle);
 

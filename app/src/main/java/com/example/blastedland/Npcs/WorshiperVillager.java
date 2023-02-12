@@ -33,6 +33,24 @@ public class WorshiperVillager implements Npc{
                     conversation.overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
                     break;
 
+                case "Why do you need to believe something?":
+
+                    conversation.npcText.setText("Because my fellow, without faith, \n You become empty shell");
+
+                    break;
+
+                case "Bullshit, you are just aberrant!":
+
+                    conversation.npcText.setText("Yeah, you are kinda right but we need thatt!");
+
+                    break;
+
+                case "All Hail the Ctulhu!":
+
+                    conversation.npcText.setText("So, you are one of us huh.");
+
+                    break;
+
             }
         }
 

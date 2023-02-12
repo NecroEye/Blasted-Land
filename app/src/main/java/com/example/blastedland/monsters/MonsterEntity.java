@@ -4,12 +4,16 @@ import com.example.blastedland.BattleArea;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.player.UI;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public abstract class MonsterEntity {
 
 
     protected String monsterName;
     protected double monsterHealth;
     protected double monsterDamage;
+    protected final ArrayList<Double> RandomizeDamage = new ArrayList<>();
 
 
     public double getMonsterHealth() {
@@ -31,6 +35,7 @@ public abstract class MonsterEntity {
     public String getMonsterName() {
         return monsterName;
     }
+
 }
 
 

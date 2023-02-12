@@ -24,7 +24,11 @@ public class Dragon extends MonsterEntity implements MonsterAction {
 
         monsterName = "Ice Dragon";
         monsterHealth = 30;
-        monsterDamage = 4;
+
+        RandomizeDamage.add(2.25);
+        RandomizeDamage.add(2.50);
+        RandomizeDamage.add(2.75);
+        RandomizeDamage.add(3.15);
 
         battleArea.monsterName.setText(monsterName);
         battleArea.monsterView.setImageResource(R.drawable.dragon);
@@ -37,6 +41,9 @@ public class Dragon extends MonsterEntity implements MonsterAction {
     @Override
     public void attack(UI ui, BattleArea area) {
 
+        Random randomDamageSelector = new Random();
+
+        int selected = randomDamageSelector.nextInt(4);
 
 
         Animation bounce = AnimationUtils.loadAnimation(area, R.anim.bounce);
@@ -45,7 +52,7 @@ public class Dragon extends MonsterEntity implements MonsterAction {
 
         if (ui.health > 0 && monsterHealth > 0) {
 
-            ui.health -= monsterDamage;
+            ui.health -= RandomizeDamage.get(selected);
             area.heroHealth.setText(ui.health + " Health");
             area.heroHealth.startAnimation(bounce);
             area.monsterTurnView.setVisibility(View.INVISIBLE);
@@ -53,7 +60,7 @@ public class Dragon extends MonsterEntity implements MonsterAction {
             GameScreen.healthTx.setText("=" + ui.health);
             area.heroView.startAnimation(newBounce);
             ui.phaseTransformation(GameScreen.HealthImg);
-            area.battleText.setText("You were got " + monsterDamage + " \n damage by " + monsterName);
+            area.battleText.setText("You were got " + RandomizeDamage.get(selected) + " \n damage by " + monsterName);
             area.battleText.setTextColor(Color.parseColor("#E97451"));
 
 

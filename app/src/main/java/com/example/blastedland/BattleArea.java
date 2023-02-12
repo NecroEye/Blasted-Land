@@ -23,6 +23,8 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.blastedland.monsters.Dragon;
 import com.example.blastedland.monsters.Giant;
 import com.example.blastedland.monsters.Kraken;
@@ -127,6 +129,11 @@ public class BattleArea extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         player.stop();
@@ -220,6 +227,7 @@ public class BattleArea extends AppCompatActivity {
         potion.HealingByPotion();
         monsterAttack();
 
+
     }
 
     public void battleButton2(View v) {
@@ -236,6 +244,7 @@ public class BattleArea extends AppCompatActivity {
 
         ui.CritHeroAttack(monsterEntity,this);
         monsterAttack();
+
 
     }
 
