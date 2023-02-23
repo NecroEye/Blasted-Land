@@ -80,6 +80,8 @@
                 android:text="Credit"
                 android:textSize="29sp" />
 
+
+
             <TextView
                 android:id="@+id/versionTitle"
                 android:layout_width="113dp"

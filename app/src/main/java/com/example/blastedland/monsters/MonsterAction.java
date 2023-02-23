@@ -8,6 +8,7 @@ public interface MonsterAction {
 
 
     void attack(UI ui, BattleArea area);
+     void PreventAttack(UI ui, BattleArea battleArea);
 
     void battleChoose(BattleArea battleArea, String choose);
 

@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -25,6 +26,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.blastedland.kingdom.places.Square;
+import com.example.blastedland.player.UI;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.time.DayOfWeek;
 
 public class GameScreen extends AppCompatActivity {
 
@@ -38,15 +43,23 @@ public class GameScreen extends AppCompatActivity {
     private LinearLayout layout;
     private View popUpView;
     private static boolean isOpen = false;
+    private UI ui;
+    protected Menu menu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
 
+        ui = UI.getInstance();
+
         maingamesong = MediaPlayer.create(this, R.raw.ancient);
         maingamesong.setLooping(true);
         maingamesong.start();
+
+        //BottomNavigationView navigation = this.findViewById(R.id.BottomNavBar);
+        //menu = navigation.getMenu();
 
         layout = findViewById(R.id.linearLayout);
 
@@ -87,6 +100,7 @@ public class GameScreen extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -123,6 +137,7 @@ public class GameScreen extends AppCompatActivity {
         animateImage();
         animateText();
 
+        //menu.findItem(R.id.timer).setTitle(gameDay.currentTime);
 
     }
 
@@ -188,13 +203,12 @@ public class GameScreen extends AppCompatActivity {
         layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0));
 
 
-
-        if(story.nextPosition2.matches("Take a look")){
+        if (story.nextPosition2.matches("Take a look")) {
 
             popupButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Animation change = AnimationUtils.loadAnimation(GameScreen.this,R.anim.bounce);
+                    Animation change = AnimationUtils.loadAnimation(GameScreen.this, R.anim.bounce);
                     popupWindow.dismiss();
 
                     button2.startAnimation(change);
@@ -202,8 +216,7 @@ public class GameScreen extends AppCompatActivity {
                 }
             });
 
-        }
-        else if(isOpen == false){
+        } else if (isOpen == false) {
 
             isOpen = true;
 
@@ -230,9 +243,8 @@ public class GameScreen extends AppCompatActivity {
             });
 
 
-        }
-        else {
-            popupButton.setOnClickListener(view ->  popupWindow.dismiss());
+        } else {
+            popupButton.setOnClickListener(view -> popupWindow.dismiss());
 
         }
 

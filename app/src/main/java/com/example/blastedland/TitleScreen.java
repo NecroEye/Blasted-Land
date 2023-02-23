@@ -50,6 +50,7 @@ public class TitleScreen extends AppCompatActivity {
         YoYo.with(Techniques.Tada).duration(1000).delay(1000).repeat(1).playOn(start);
 
 
+
         player = MediaPlayer.create(this, R.raw.mainsong);
         player.setLooping(true);
         player.start();
@@ -82,7 +83,9 @@ public class TitleScreen extends AppCompatActivity {
 
     }
 
+
     public void credits(View v) {
+
 
         Toast.makeText(this, "Developed by Muratcan Gözüm", Toast.LENGTH_LONG).show();
 

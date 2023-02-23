@@ -29,6 +29,7 @@ import com.example.blastedland.Npcs.Stranger;
 import com.example.blastedland.Npcs.Thief;
 import com.example.blastedland.Npcs.Witch;
 import com.example.blastedland.Npcs.WorshiperVillager;
+import com.example.blastedland.monsters.Giant;
 import com.example.blastedland.player.UI;
 
 public class Conversation extends AppCompatActivity {
@@ -241,12 +242,17 @@ public class Conversation extends AppCompatActivity {
                 npcText.setText("Soo, you are looking for some curse or not?.");
                 heroButton1.setText("Buy a Potion(5)");
                 heroButton2.setText("Explain your situation");
-                heroButton3.setText("");
+                heroButton3.setText("I found the head you wanted");
                 heroButton4.setText("Back");
                 LocationImage.setImageResource(R.drawable.hut);
 
+                if(Giant.isGiantFounded){
+                    heroButton3.setVisibility(View.VISIBLE);
+                }
+                else{
+                    heroButton3.setVisibility(View.INVISIBLE);
 
-                heroButton3.setVisibility(View.INVISIBLE);
+                }
 
                 break;
 

@@ -41,6 +41,7 @@ public class Blacksmith implements Npc {
 
                     conversation.npcText.setText("Hi, my name is Bob, the blacksmith");
 
+
                     break;
 
                 case "i am looking for job":

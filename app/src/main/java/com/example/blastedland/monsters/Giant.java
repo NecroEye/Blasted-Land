@@ -6,23 +6,24 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.blastedland.BattleArea;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.player.UI;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Giant extends MonsterEntity implements MonsterAction{
+public class Giant extends MonsterEntity implements MonsterAction {
 
 
     public static boolean isGainedItsHead = false, isGiantFounded = false;
 
 
-
-
-    public Giant(BattleArea battleArea){
+    public Giant(BattleArea battleArea) {
 
         monsterName = "Giant";
         monsterHealth = 35;
@@ -33,14 +34,11 @@ public class Giant extends MonsterEntity implements MonsterAction{
         RandomizeDamage.add(1.75);
 
 
-
         battleArea.monsterName.setText(monsterName);
         battleArea.monsterView.setImageResource(R.drawable.giant);
         battleArea.monsterHealth.setText(monsterHealth + " Health");
 
     }
-
-
 
 
     @Override
@@ -58,7 +56,7 @@ public class Giant extends MonsterEntity implements MonsterAction{
         if (ui.health > 0 && monsterHealth > 0) {
 
             ui.health -= RandomizeDamage.get(selected);
-            area.heroHealth.setText(ui.health + " Health");
+            area.heroHealth.setText((int)ui.health + " Health");
             area.heroHealth.startAnimation(bounce);
             area.monsterTurnView.setVisibility(View.INVISIBLE);
             area.heroTurnView.setVisibility(View.VISIBLE);
@@ -67,7 +65,6 @@ public class Giant extends MonsterEntity implements MonsterAction{
             ui.phaseTransformation(GameScreen.HealthImg);
             area.battleText.setText("You were got " + RandomizeDamage.get(selected) + " \n damage by " + monsterName);
             area.battleText.setTextColor(Color.parseColor("#E97451"));
-
 
 
         }
@@ -114,6 +111,24 @@ public class Giant extends MonsterEntity implements MonsterAction{
 
                     break;
                 }
+        }
+
+    }
+
+    @Override
+    public void PreventAttack(UI ui, BattleArea battleArea) {
+
+        Random random = new Random();
+        int a = random.nextInt(3);
+
+        if (a == 1) {
+
+            battleArea.choose3.setClickable(false);
+            battleArea.choose3.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+            YoYo.with(Techniques.Shake).duration(750).playOn(battleArea.choose3);
+
+            Snackbar.make(battleArea.choose1, "Your powerful attack is prevented in this turn", Snackbar.LENGTH_LONG).show();
+
         }
 
     }

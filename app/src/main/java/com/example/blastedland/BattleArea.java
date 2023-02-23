@@ -102,7 +102,6 @@ public class BattleArea extends AppCompatActivity {
         choose3.setText("Power " + "(" + ui.powerfulAmount + ")");
 
 
-
         String monster = getIntent().getStringExtra("monster");
 
         switch (monster) {
@@ -165,6 +164,7 @@ public class BattleArea extends AppCompatActivity {
                                 }
 
                                 allButtonUnlocked();
+                                monsterAction.PreventAttack(ui, BattleArea.this);
 
                                 if (ui.health <= 0) {
 
@@ -189,18 +189,24 @@ public class BattleArea extends AppCompatActivity {
                                     allButtonLocked();
                                     popupImage.setImageResource(R.drawable.money_bag);
 
-                                    if(monsterEntity instanceof Dragon){
+                                    if (monsterEntity instanceof Dragon) {
 
                                         popupText.setText("You Won! \n You have earned 35 silver!");
                                         Dragon.isKilledBefore = true;
 
-                                    }else if(monsterEntity instanceof Kraken){
+                                    } else if (monsterEntity instanceof Kraken) {
 
                                         popupText.setText("You Won! \n You have earned 20 silver!");
 
-                                    }else if(monsterEntity instanceof Giant){
+                                    } else if (monsterEntity instanceof Giant) {
 
-                                        popupText.setText("You Won! \n You have earned 27 silver!");
+                                        if (Giant.isGainedItsHead) {
+
+
+                                            popupText.setText("You Won! \n You have earned 27 silver!");
+                                        }
+                                        Giant.isGainedItsHead = true;
+                                        popupText.setText("You Won! \n You have earned 27 silver! \n and Giant Head!");
                                     }
 
                                     popupButton.setText("Take");
@@ -242,7 +248,7 @@ public class BattleArea extends AppCompatActivity {
 
     public void battleButton3(View v) {
 
-        ui.CritHeroAttack(monsterEntity,this);
+        ui.CritHeroAttack(monsterEntity, this);
         monsterAttack();
 
 
@@ -295,20 +301,18 @@ public class BattleArea extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
 
-                    if(monsterEntity instanceof Dragon){
+                    if (monsterEntity instanceof Dragon) {
 
                         UI.powerfulAmount = 2;
                         ui.silver += 35;
                         GameScreen.moneyTx.setText("=" + ui.silver);
 
-                    }
-                    else if(monsterEntity instanceof Kraken){
+                    } else if (monsterEntity instanceof Kraken) {
 
                         UI.powerfulAmount = 2;
                         ui.silver += 20;
                         GameScreen.moneyTx.setText("=" + ui.silver);
-                    }
-                    else if(monsterEntity instanceof Giant){
+                    } else if (monsterEntity instanceof Giant) {
 
                         UI.powerfulAmount = 2;
                         ui.silver += 27;

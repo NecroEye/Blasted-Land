@@ -94,6 +94,24 @@ public class Witch implements Npc {
 
                     break;
 
+                case "I found the head you wanted":
+
+                    conversation.npcText.setText("Yes, with that skull i can tell who you are in the past");
+                    conversation.heroButton3.setText("Tell me");
+
+
+
+                    break;
+
+                case "Tell me":
+
+                    conversation.npcText.setText("I just tell that much if you want more information, \n talk with wizard in the capital city at west");
+                    conversation.heroButton3.setText("Thanks");
+
+                    conversation.popupImage.setImageResource(R.drawable.realhero);
+                    conversation.popupText.setText("in the past you were a honorable hero but, \n something went wrong  and  you got killed.");
+                    conversation.createPopUpWindow();
+                    break;
 
             }
         }

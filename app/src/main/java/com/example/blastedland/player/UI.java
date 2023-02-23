@@ -63,7 +63,7 @@ public class UI {
         if (mainVariables.getMonsterHealth() > 0 && health > 0) {
 
             mainVariables.setMonsterHealth(mainVariables.getMonsterHealth() - basicDamage.get(selected));
-            battleArea.monsterHealth.setText(mainVariables.getMonsterHealth() + " Health");
+            battleArea.monsterHealth.setText((int)mainVariables.getMonsterHealth() + " Health");
             battleArea.monsterHealth.startAnimation(bounce);
             battleArea.monsterView.startAnimation(newBounce);
             battleArea.battleText.setText(mainVariables.getMonsterName() + " was got " + basicDamage.get(selected) + " \n damage by you");
@@ -99,13 +99,13 @@ public class UI {
             battleArea.choose3.setText("Power " + "(" + powerfulAmount + ")");
 
             mainVariables.setMonsterHealth(mainVariables.getMonsterHealth() - (basicDamage.get(selected) * 2));
-            battleArea.monsterHealth.setText(mainVariables.getMonsterHealth() + " Health");
+            battleArea.monsterHealth.setText((int)mainVariables.getMonsterHealth() + " Health");
             battleArea.monsterHealth.startAnimation(bounce);
             battleArea.monsterView.startAnimation(newBounce);
             battleArea.battleText.setText(mainVariables.getMonsterName() + " was got " + (basicDamage.get(selected) * 2) + " \n damage by you");
             battleArea.battleText.setTextColor(Color.GREEN);
             battleArea.allButtonLocked();
-            YoYo.with(Techniques.RubberBand).delay(50).duration(150).playOn(battleArea.choose2);
+            YoYo.with(Techniques.RubberBand).delay(50).duration(150).playOn(battleArea.choose3);
 
 
 
@@ -135,7 +135,7 @@ public class UI {
 
     public void phaseTransformation(ImageView imageView) {
 
-        //ImageView da bounce eklenecek fakat imageView tanımlanmadı ve isimlenmedi onu kontrol et
+        
 
         if (health >= 20) {
 

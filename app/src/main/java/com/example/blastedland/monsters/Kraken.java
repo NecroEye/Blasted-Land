@@ -6,12 +6,15 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.blastedland.BattleArea;
 import com.example.blastedland.Conversation;
 import com.example.blastedland.GameScreen;
 import com.example.blastedland.R;
 import com.example.blastedland.Story;
 import com.example.blastedland.player.UI;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -51,7 +54,7 @@ public class Kraken extends MonsterEntity implements MonsterAction {
         if (ui.health > 0 && monsterHealth > 0) {
 
             ui.health -= RandomizeDamage.get(selected);
-            area.heroHealth.setText(ui.health + " Health");
+            area.heroHealth.setText((int)ui.health + " Health");
             area.heroHealth.startAnimation(bounce);
             area.monsterTurnView.setVisibility(View.INVISIBLE);
             area.heroTurnView.setVisibility(View.VISIBLE);
@@ -113,4 +116,21 @@ public class Kraken extends MonsterEntity implements MonsterAction {
 
     }
 
+    @Override
+    public void PreventAttack(UI ui, BattleArea battleArea) {
+
+        Random random = new Random();
+        int a = random.nextInt(3);
+
+        if (a == 1) {
+            battleArea.choose1.setClickable(false);
+            battleArea.choose1.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+            YoYo.with(Techniques.Shake).duration(750).playOn(battleArea.choose1);
+
+
+            Snackbar.make(battleArea.choose1, "You cannot use your potion in this turn", Snackbar.LENGTH_LONG).show();
+
+        }
+
+    }
 }
