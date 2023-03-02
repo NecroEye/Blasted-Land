@@ -3,7 +3,9 @@ package com.example.blastedland.village;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.view.View;
+
 import androidx.core.content.ContextCompat;
+
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.blastedland.BattleArea;
@@ -104,6 +106,29 @@ public class Town {
         story.nextPosition2 = "giant";
         story.nextPosition3 = "well";
         story.nextPosition4 = "village";
+
+    }
+
+    public void well() {
+
+        gameScreen.gameImage.setImageResource(R.drawable.waterwell);
+        gameScreen.gameText.setText("There is a magical light in the well, \n try drop some coin.");
+
+        gameScreen.button1.setText("");
+        gameScreen.button2.setText("Drop couple of coin(10)");
+        gameScreen.button3.setText("Go Back");
+        gameScreen.button4.setText("");
+
+        gameScreen.button1.setVisibility(View.INVISIBLE);
+        gameScreen.button4.setVisibility(View.INVISIBLE);
+
+        gameScreen.button2.setVisibility(View.VISIBLE);
+
+
+        story.nextPosition1 = "";
+        story.nextPosition2 = "luck";
+        story.nextPosition3 = "stvillage";
+        story.nextPosition4 = "";
 
     }
 

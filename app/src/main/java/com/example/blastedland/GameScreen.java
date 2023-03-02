@@ -1,5 +1,6 @@
 package com.example.blastedland;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -27,6 +28,13 @@ import android.widget.TextView;
 
 import com.example.blastedland.kingdom.places.Square;
 import com.example.blastedland.player.UI;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.time.DayOfWeek;
@@ -45,6 +53,8 @@ public class GameScreen extends AppCompatActivity {
     private static boolean isOpen = false;
     private UI ui;
     protected Menu menu;
+    private InterstitialAd mInterstitialAd;
+
 
 
     @Override
@@ -52,7 +62,40 @@ public class GameScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {}
+        });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+
+        InterstitialAd.load(this,"ca-app-pub-1436561055108702/2339905458", adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+
+                        mInterstitialAd = interstitialAd;
+
+                        if (mInterstitialAd != null) {
+                            mInterstitialAd.show(GameScreen.this);
+                        } else {
+                            System.out.println("Ad is null");
+                        }
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+
+                        System.out.println("Ad wasn't loaded");
+                        mInterstitialAd = null;
+                    }
+                });
+
         ui = UI.getInstance();
+
+        //Geçişli banner id
+        // ca-app-pub-1436561055108702/2339905458
 
         maingamesong = MediaPlayer.create(this, R.raw.ancient);
         maingamesong.setLooping(true);

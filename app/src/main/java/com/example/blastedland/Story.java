@@ -15,6 +15,7 @@ import com.example.blastedland.monsters.Dragon;
 import com.example.blastedland.mountain.AshenMountain;
 import com.example.blastedland.player.UI;
 import com.example.blastedland.village.Town;
+import com.google.android.material.snackbar.Snackbar;
 
 public class Story {
 
@@ -176,6 +177,40 @@ public class Story {
             case "villager":
 
                 town.toVillager();
+
+                break;
+
+            case "well":
+
+                town.well();
+
+                break;
+
+            case "luck":
+
+                if (ui.silver >= 10) {
+
+
+                    if(ui.reincarnation >= 1){
+                        Snackbar.make(gs.button2,"you only possess max one card.",Snackbar.LENGTH_LONG).show();
+                        return;
+                    }
+
+                    ui.silver -= 10;
+                    gs.moneyTx.setText("" + ui.silver);
+                    ui.reincarnation += 1;
+                    gs.reincarnationTx.setText("X" + ui.reincarnation);
+
+                    gs.popupImage.setImageResource(R.drawable.card);
+                    gs.popupText.setText("Inside the well a card is soaring toward you. \n when you upon the death, this card will be your second chance");
+                    gs.createPopUpWindow();
+
+                }
+                else{
+                    gs.popupImage.setImageResource(R.drawable.yenicoin);
+                    gs.popupText.setText("You haven't enough money to drop.");
+                    gs.createPopUpWindow();
+                }
 
                 break;
         }

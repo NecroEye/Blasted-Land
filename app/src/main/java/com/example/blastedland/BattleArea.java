@@ -32,6 +32,11 @@ import com.example.blastedland.monsters.MonsterAction;
 import com.example.blastedland.monsters.MonsterEntity;
 import com.example.blastedland.player.Potion;
 import com.example.blastedland.player.UI;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class BattleArea extends AppCompatActivity {
 
@@ -48,6 +53,8 @@ public class BattleArea extends AppCompatActivity {
     private View popUpView;
     public Intent title;
     public Vibrator vibe;
+    private GameScreen gs;
+    private AdView adView3;
 
 
     @Override
@@ -55,6 +62,18 @@ public class BattleArea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle_area);
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        adView3 = findViewById(R.id.adView3);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView3.loadAd(adRequest);
+
+
+        gs = new GameScreen();
         ui = UI.getInstance();
 
         vibe = (Vibrator) BattleArea.this.getSystemService(this.VIBRATOR_SERVICE);
@@ -158,32 +177,49 @@ public class BattleArea extends AppCompatActivity {
                             public void run() {
 
 
-                                if (monsterEntity.getMonsterHealth() > 0) {
+                                if (monsterEntity.getMonsterHealth() > 0 && ui.health > 0) {
 
                                     monsterAction.attack(ui, BattleArea.this);
+                                    allButtonUnlocked();
+                                    monsterAction.PreventAttack(ui, BattleArea.this);
                                 }
 
-                                allButtonUnlocked();
-                                monsterAction.PreventAttack(ui, BattleArea.this);
+
 
                                 if (ui.health <= 0) {
 
 
-                                    if (Build.VERSION.SDK_INT >= 26) {
+                                    if(ui.reincarnation > 0){
 
-                                        VibrationEffect vibrationEffect1 = VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE);
-                                        vibe.vibrate(vibrationEffect1);
-                                    } else {
-                                        vibe.vibrate(1000);
+
+
+                                        popupImage.setImageResource(R.drawable.darkarts);
+                                        popupText.setText("You are once more called back to living world. \n by using your card.");
+                                        popupButton.setText("...");
+
+
+                                        createPopUpWindow();
+
+                                    }
+                                    else{
+                                        if (Build.VERSION.SDK_INT >= 26) {
+
+                                            VibrationEffect vibrationEffect1 = VibrationEffect.createOneShot(1000, VibrationEffect.DEFAULT_AMPLITUDE);
+                                            vibe.vibrate(vibrationEffect1);
+                                        } else {
+                                            vibe.vibrate(1000);
+                                        }
+
+                                        allButtonLocked();
+                                        popupImage.setImageResource(R.drawable.death);
+                                        popupText.setText("YOU DIED.");
+                                        popupButton.setText("Exit");
+
+
+                                        createPopUpWindow();
                                     }
 
-                                    allButtonLocked();
-                                    popupImage.setImageResource(R.drawable.death);
-                                    popupText.setText("YOU DIED.");
-                                    popupButton.setText("Exit");
 
-
-                                    createPopUpWindow();
                                 } else if (monsterEntity.getMonsterHealth() <= 0) {
 
                                     allButtonLocked();
@@ -274,26 +310,51 @@ public class BattleArea extends AppCompatActivity {
         layout.post(() -> popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0));
 
 
+
         if (ui.health <= 0) {
 
-            popupButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+           if(ui.reincarnation > 0){
+               popupButton.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
 
 
-                    ui.silver = 0;
-                    ui.key = 0;
-                    ui.health = 20;
-                    ui.reincarnation = 0;
-
-                    popupWindow.dismiss();
-                    layout.removeView(popUpView);
-                    startActivity(title);
-                    overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                       ui.reincarnation -= 1;
+                       ui.health = 15;
+                       UI.powerfulAmount = 2;
+                       gs.reincarnationTx.setText("X"+ ui.reincarnation);
+                       gs.healthTx.setText("=" + ui.health);
 
 
-                }
-            });
+                       popupWindow.dismiss();
+                       layout.removeView(popUpView);
+                       finish();
+                       overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+
+                   }
+               });
+           }
+           else{
+               popupButton.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View view) {
+
+
+                       ui.silver = 0;
+                       ui.key = 0;
+                       ui.health = 20;
+                       ui.reincarnation = 0;
+
+                       popupWindow.dismiss();
+                       layout.removeView(popUpView);
+                       startActivity(title);
+                       overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+
+
+                   }
+               });
+           }
 
         } else if (monsterEntity.getMonsterHealth() <= 0) {
 
@@ -318,6 +379,7 @@ public class BattleArea extends AppCompatActivity {
                         ui.silver += 27;
                         GameScreen.moneyTx.setText("=" + ui.silver);
                     }
+
 
                     popupWindow.dismiss();
                     layout.removeView(popUpView);
